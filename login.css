@@ -5,3 +5,11 @@ body {
     align-items: center;
     justify-content: center;
 }
+
+h1 {
+    font-family: "Edu AU VIC WA NT Pre", cursive;
+}
+
+h2 {
+    font-family: "Montserrat", sans-serif;
+}
