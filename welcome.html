@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="welcome.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <title>Dishy | Login</title>
 </head>
 <body>
     <h1></h1>
     <script>
+        window.onload = () => {
+          gsap.from("body", {
+            opacity: 0,
+            duration: 1.5,
+            y: 50,
+            ease: "power2.out"
+          });
+        };
+
         var name = localStorage.getItem("displayName");
 
         document.querySelector("h1").innerHTML = "Hello, " + name;
