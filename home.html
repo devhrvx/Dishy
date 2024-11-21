@@ -21,6 +21,10 @@
 
         var name = localStorage.getItem("displayName");
 
+        if (name === null || name === undefined) {
+            window.location.href = "index.html";
+        }
+
         document.querySelector("h1").innerHTML = "Hello, " + name;
     </script>
 </body>
