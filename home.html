@@ -19,10 +19,10 @@
           });
         };
 
-        var name = localStorage.getItem("displayName");
+        const name = localStorage.getItem('name');
 
-        if (name === null || name === undefined) {
-            window.location.href = "index.html";
+        if (!name) {
+          window.location.href = '/login.html';
         }
 
         document.querySelector("h1").innerHTML = "Hello, " + name;
