@@ -33,7 +33,7 @@ googleLogin.addEventListener("click", function(){
     console.log(user);
     const displayName = user.displayName;
     localStorage.setItem("displayName", displayName);
-    window.location.href = "index.html";
+    window.location.href = "home.html";
   }).catch((error)=> {
     const errorCode = error.code;
     const errorMessage = error.message;
