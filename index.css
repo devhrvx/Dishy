@@ -1,76 +1,86 @@
 body {
     display: flex;
-    min-height: 90vh;
+    min-height: 100vh;
     flex-direction: column;
     align-items: center;
-    background-color: #c13547;
+    background: linear-gradient(to top, #FBD288, #FCF596, #fcf6a6);
     justify-content: center;
     overflow: hidden;
 }
 
 .container {
-    position: absolute;
- /* background-color: rgba(255, 255, 255, 0.3); */
-    background-color: #ca4b5c;
-    width: 700px;
-    height: 500px;
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%);
-    backdrop-filter: blur(20px);
-    border-radius: 4rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);;
+    width: 800px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* border: 2px solid black; */
 }
 
-h1, h3, #loginBtn {
-    position: relative;
-    z-index: 1;
+.container .text-cont {
+    font-family: 'Noto Serif', serif;
+    font-weight: 400;
+    font-size: 15px;
+    text-align: start;
+    background-color: white;
+    width: 50%;
+    height: 80%;
+    padding: 10px 25px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
 }
 
-h1 {
-    font-family: sour gummy;
-    font-weight: 900;
-    color: #3b090e;
-    text-shadow: 3px 3px #6f1d26;
-    font-size: 3rem;
+.container .login-cont {
+    font-family: 'Parkinsans', sans-serif;
+    background-color: white;
+    width: 30%;
+    height: 80%;
+    padding: 10px 25px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-direction: column;
 }
 
-#dishy {
-    bottom: 3rem;
-    font-size: 4rem;
+.logo {
+    width: 280px;
+    height: 85px;
+    margin-top: 20px;
+
 }
 
-h3 {
-    bottom: 2rem;
-    font-weight: 500;
-    font-family: sour gummy;
+.google {
+    width: 10%;
+    margin-right: 10px;
 }
 
 #loginBtn {
+    font-size: 16px;
     display: flex;
-    border-radius: 50px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 10px;
-    padding-right: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: #e7e5e5;
+    height: 40px;
+    border-radius: 8px;
     cursor: pointer;
-    box-shadow: 1px 1px rgb(77, 74, 74);
-    background-color: transparent;
-    font-family: sour gummy;
+    transition: .3s ease;
 }
 
 #loginBtn:hover {
-    background-color: transparent;
-    box-shadow: 0 0 10px 1px
-                #9c2535;
-    transition: 2s ease;
-    transform: scaleX(1.1);
-    cursor: pointer;
+    background-color: #f3eadb;
 }
- 
-#loginBtn::before {
-    background: linear-gradient(120deg, transparent, #00fffc, transparent);
-    transform: translateX(-100%);
-    transition: 0.6s;
-    position: absolute;
+
+#loginBtn:active {
+    background-color: #c0b7a9;
 }
+
+
+/* #FCF596
+#FBD288
+#FF9C73
+#FF4545 */
