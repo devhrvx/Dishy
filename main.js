@@ -38,5 +38,7 @@ googleLogin.addEventListener("click", function(){
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log(`Code: ${errorCode}\n${errorMessage}`);
+    alert("Error during login: " + error.message);
+    console.log(`Code: ${error.code}\n${error.message}`);
   })
 }); 

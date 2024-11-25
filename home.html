@@ -18,14 +18,13 @@
             ease: "power2.out"
           });
         };
-
-        const name = localStorage.getItem('name');
-
-        if (!name) {
-          window.location.href = '/index.html';
+       
+        const displayName = localStorage.getItem("displayName");
+        if (displayName) {
+            document.querySelector("h1").innerHTML = "Hello, " + displayName;
+        } else {
+          window.location.href = "index.html";
         }
-
-        document.querySelector("h1").innerHTML = "Hello, " + name;
     </script>
 </body>
 </html>
