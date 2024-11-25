@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="main.js" defer type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link rel="icon" type="image/x-icon" href="res/Dishy-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +14,11 @@
     <link rel="stylesheet" href="index.css">
     <title>Dishy | Login</title>
 </head>
-<body>   
+<body>
+    <div class="preview">
+
+    </div>
+    
      <div class="container">
         <div class="text-cont">
             <img src="res/Dishy.png" alt="" class="logo">
@@ -24,9 +29,24 @@
             <div id="loginBtn"><img src="res/Google__G__logo.svg.webp" alt="" class="google">Google</div>
         </div>
      </div>
-    
+     
+<script>
+        window.onload = () => {
+          gsap.from(".text-cont", {
+            opacity: 0,
+            duration: 1,
+            y: 30,
+            ease: "power2.out",
+          });
 
-    <!-- <button id="loginBtn"> Login or Sign Up with Google </button> -->
-
+          gsap.from(".login-cont", {
+            opacity: 0,
+            duration: .8,
+            y: 30,
+            ease: "power2.out",
+            delay: .5
+          })
+        };
+</script>
 </body>
 </html>
