@@ -2,11 +2,11 @@ body {
     display: flex;
     min-height: 100vh;
     align-items: center;
-    background: linear-gradient(to top, #FBD288, #FCF596, #fcf6a6);
     justify-content: space-between;
     overflow: hidden;
     padding: 0;
     margin: 0;
+    animation: bgColorChange 25s infinite linear;
 }
 
 .container {
@@ -47,7 +47,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
+    font-size: 16px;
     flex-direction: column;
 }
 
@@ -58,21 +58,23 @@ body {
 }
 
 .google {
-    width: 10%;
+    width: 8%;
     margin-right: 10px;
 }
 
 #loginBtn {
-    font-size: 16px;
+    font-size: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #e7e5e5;
-    height: 40px;
+    height: 30px;
     border-radius: 8px;
     cursor: pointer;
     transition: .3s ease;
     padding: 5px 0px;
+    width: 90%;
+    margin-bottom: 15px;
 }
 
 #loginBtn:hover {
@@ -86,7 +88,9 @@ body {
 .preview {
     height: 100vh;
     width: 70%;
-    background-color: #61584ab8;
+    background-position: center;
+    background-size: cover;
+    transition: background-image 1s ease-in-out;
 }
 
 @media (max-width: 700px) {
@@ -110,6 +114,24 @@ body {
 
     .preview {
         visibility: hidden;
+    }
+}
+
+@keyframes bgColorChange {
+    0% {
+        background-color: #FCF596;
+    }
+    25% {
+        background-color: #FBD288;
+    }
+    55% {
+        background-color: #FF9C73;
+    }
+    90% {
+        background-color: #FF4545;
+    }
+    100% {
+        background-color: #FCF596;
     }
 }
 

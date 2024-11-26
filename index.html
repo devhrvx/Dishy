@@ -31,6 +31,22 @@
      </div>
      
 <script>
+        
+        const images = [
+            'url("res/berries.jpg")',
+            'url("res/empanada.jpg")',
+            'url("res/breakfast.jpg")',
+            'url("res/pizza.jpg")'
+        ];
+        let i = 0;
+        function changeBackground() {
+          document.querySelector('.preview').style.backgroundImage = images[i];
+          i = (i + 1) % images.length;
+        };
+
+        setInterval(changeBackground, 5000);
+
+        changeBackground();
         window.onload = () => {
           gsap.from(".text-cont", {
             opacity: 0,

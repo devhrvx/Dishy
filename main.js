@@ -32,6 +32,8 @@ googleLogin.addEventListener("click", function(){
     const user = result.user;
     console.log(user);
     const displayName = user.displayName;
+    const userID = user.uid;
+    localStorage.setItem("userID", userID);
     localStorage.setItem("displayName", displayName);
     window.location.href = "home.html";
   }).catch((error)=> {
