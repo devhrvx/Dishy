@@ -5,47 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="home.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <title>Dishy | Login</title>
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth.js"></script>
+    <title>Dishy | Home</title>
 </head>
 <body>
-    <h1></h1>
-    <p></p>
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-    
-      const firebaseConfig = {
-        apiKey: "AIzaSyDvXage0SbYUMV8RFZzn48ANw4GX_D6Zfo",
-        authDomain: "dishy-280a7.firebaseapp.com",
-        projectId: "dishy-280a7",
-        storageBucket: "dishy-280a7.firebasestorage.app",
-        messagingSenderId: "785622443437",
-        appId: "1:785622443437:web:acbe9c5813fb60be0c2d24",
-        measurementId: "G-N3X5D4SQ58"
-      };
-    
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-    
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-            document.querySelector('h1').innerHTML = "hello, " + user.displayName;
-            document.querySelector('p').innerHTML = "User ID: " + user.uid;
-          
-        } else {
-          console.log("No user is signed in.");
-          window.location.href = "login.html";
-        }
-      });
-      window.onload = () => {
-          gsap.from("body", {
-            opacity: 0,
-            duration: .8,
-            y: 30,
-            ease: "power2.out"
-          });
-      };
-    </script>
-    
+  <div class="container">
+    <h1>Hello</h1>
+  </div>
+<script type="module" src="home.js"></script>
 </body>
 </html>
