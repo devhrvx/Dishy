@@ -1,5 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDvXage0SbYUMV8RFZzn48ANw4GX_D6Zfo",
   authDomain: "dishy-280a7.firebaseapp.com",
@@ -17,31 +19,23 @@ var logoutButton = document.querySelector('.logoutButton');
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
+      document.querySelector('h1').innerHTML = "Hello, " + user.displayName;
       console.log("Hello, " + user.displayName);
       console.log("User ID: " + user.uid);
     
   } else {
     console.log("No user is signed in.");
-    window.location.href = "login.html";
+    window.location.href = "index.html";
   }
 });
 
 logoutButton.addEventListener('click', () => {
     signOut(auth)
         .then(() => {
-            console.log("User signed out successfully.");
-            window.location.href = "login.html";
+            console.log("User logged out successfully.");
+            window.location.href = "index.html";
         })
         .catch((error) => {
-            console.error("Error signing out:", error);
+            console.error("Error logging out:", error);
         });
 });
-
-window.onload = () => {
-    gsap.from("body", {
-      opacity: 0,
-      duration: .8,
-      y: 30,
-      ease: "power2.out"
-    });
-};

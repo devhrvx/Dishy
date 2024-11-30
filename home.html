@@ -4,14 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="home.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Copy from here -->
+    <link rel="stylesheet" href="nav.css">
     <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
     <title>Dishy | Home</title>
 </head>
 <body>
-  <div class="container">
-    <h1>Hello</h1>
-  </div>
+    <!-- Navigation paste this -->
+    <div class="nav">
+      <div class="logo"></div>
+      <div class="logoutButton">Logout</div>
+    </div>
+
+    <div class="container">
+      <div class="greetings">
+        <h1></h1>
+      </div>
+      <div class="explore">
+        <h3>Where do you want to go?</h3>
+        <div class="explore-grid">
+
+          <div class="item book">
+            <div class="icons book"></div>
+            <h4>Recipe book</h4>
+          </div>
+
+          <div class="item generator">
+            <div class="icons generator"></div>
+            <h4>Recipe generator</h4>
+          </div>
+
+          <div class="item add">
+            <div class="icons add"></div>
+            <h4>Add your recipe</h4>
+          </div>
+
+        </div>
+      </div>
+      <div class="recommendations"></div>
+    </div>
 <script type="module" src="home.js"></script>
 </body>
 </html>

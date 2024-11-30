@@ -1,13 +1,114 @@
 body {
     min-height: 90vh;
-    background-color: rgb(220, 201, 127);
+    background-color: #fafafa;
     padding: 0;
     margin: 0;
 }
 
 .container {
-    margin: 20px auto;
-    border: 1px solid red;
-    height: 200px;
-    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 20px;
+    width: 85%;
+    margin: 0 auto;
+    height: fit-content;
+}
+
+.greetings {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: end;
+    flex-direction: row;
+    height: 180px;
+    width: 100%;
+}
+
+h1 {
+    font-family: 'Parkinsans', sans-serif;
+    font-size: 70px;
+    margin: 0;
+    font-weight: 1000;
+}
+
+h3 {
+    padding: 10px 1%;
+    font-family: 'Fuzzy Bubbles', serif;
+    font-size: 30px;
+    margin: 0;
+    font-weight: 600;
+    width: 98%;
+    color: white;
+    background: linear-gradient(45deg, #ffab7e, #ff7575, #ff6a65);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+h4 {
+    font-family: 'Parkinsans', sans-serif;
+}
+
+.explore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 400px;
+    width: 100%;
+}
+
+.explore .explore-grid {
+    display: grid;
+    height: 350px;
+    width: 100%;
+    background-color: #e4e4e4;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-auto-flow: column;
+    gap: 10px;
+    justify-items: center;
+    place-items: center;
+    -webkit-box-shadow: 9px 12px 14px -8px rgba(0,0,0,0.49);
+    -moz-box-shadow: 9px 12px 14px -8px rgba(0,0,0,0.49);
+    box-shadow: 9px 12px 14px -8px rgba(0,0,0,0.49);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 320px;
+    width: 280px;
+    border-radius: 24px;
+}
+
+.icons {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-color: #fff;
+    background-position: center;
+    background-size: contain;
+}
+
+.icons.book {
+    background-image: url('res/recipe_book.png');
+}
+
+.icons.generator {
+    background-image: url('res/recipe_generator.png');
+}
+
+.icons.add {
+    background-image: url('res/add_recipe.png');
+    background-size: 90%;
+}
+
+.recommendations {
+    height: 400px;
+    width: 100%;
+    border: 1px dashed green;
 }
