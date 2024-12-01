@@ -24,8 +24,7 @@ const auth = getAuth(app);
 auth.languageCode = 'en'
 const provider = new GoogleAuthProvider();
 
-const googleLogin = document.getElementById("loginBtn");
-googleLogin.addEventListener("click", function(){
+function login() {
   signInWithPopup(auth, provider)
   .then((result)=> {
     const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -43,4 +42,9 @@ googleLogin.addEventListener("click", function(){
     alert("Error during login: " + error.message);
     console.log(`Code: ${error.code}\n${error.message}`);
   })
-}); 
+};
+
+document.getElementById("google-sign-in").addEventListener("click", login);
+document.querySelectorAll(".google-sign-in").forEach(element => {
+    element.addEventListener("click", login);
+});

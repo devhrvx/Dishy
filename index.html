@@ -5,64 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="main.js" defer type="module"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link rel="icon" type="image/x-icon" href="res/Dishy-icon.png">
+    <link rel="icon" type="image/x-icon" href="res/dishy_icon.png">
+    <link rel="stylesheet" href="nav.css">
+    <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sintony:wght@400;700&display=swap" rel="stylesheet">
     
 
     <link rel="stylesheet" href="index.css">
     <title>Dishy | Login</title>
 </head>
 <body>
-    <div class="preview">
-
+    <div class="nav">
+        <div class="logo"></div>
     </div>
-    
-     <div class="container">
-        <div class="text-cont">
-            <img src="res/Dishy.png" alt="" class="logo">
-            <p>Your ultimate recipe engine and personalized cookbook in one place.</p>
+
+    <div class="preview">
+        <h2 class="title">Generate recipes on the go.</h2>
+        <p class="description">Try Dishy! <br>Type in your ingredients and see what dishes you can make from scratch!</p>
+    </div>
+
+    <div class="get-started">
+        <h1 class="start">Get started!</h1>
+        <div class="items">
+            <div class="item">
+                <div class="icon get google-sign-in"></div>
+                Get<br>Recipes
+            </div>
+
+            <div class="item">
+                <div class="icon book google-sign-in"></div>
+                Check<br>Recipe Book
+            </div>
+
+            <div class="item">
+                <div class="icon add google-sign-in"></div>
+                Add Your<br>Own Recipe
+            </div>
         </div>
-        <div class="login-cont">
-            <p>Login or Sign Up</p>
-            <div id="loginBtn"><img src="res/Google__G__logo.svg.webp" alt="" class="google">Google</div>
-        </div>
-     </div>
-     
-<script>
+
+        <h3 class="h3-1 google-sign-in">Have an account already?</h3>
+        <h3 id="google-sign-in">Sign in or sign up with  <img class="google_logo" src="res/google_logo.png" alt="Google"></h3>
         
-        const images = [
-            'url("res/berries.jpg")',
-            'url("res/empanada.jpg")',
-            'url("res/breakfast.jpg")',
-            'url("res/pizza.jpg")'
-        ];
-        let i = 0;
-        function changeBackground() {
-          document.querySelector('.preview').style.backgroundImage = images[i];
-          i = (i + 1) % images.length;
-        };
+    </div>
 
-        setInterval(changeBackground, 5000);
-
-        changeBackground();
-        window.onload = () => {
-          gsap.from(".text-cont", {
-            opacity: 0,
-            duration: 1,
-            y: 30,
-            ease: "power2.out",
-          });
-
-          gsap.from(".login-cont", {
-            opacity: 0,
-            duration: .8,
-            y: 30,
-            ease: "power2.out",
-            delay: .5
-          })
-        };
-</script>
+<script src="index.js"></script>
 </body>
 </html>

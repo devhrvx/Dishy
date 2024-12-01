@@ -1,141 +1,147 @@
 body {
+    min-height: 90vh;
+    background-color: #111212;
     display: flex;
-    min-height: 100vh;
-    align-items: center;
-    justify-content: space-between;
-    overflow: hidden;
-    padding: 0;
+    flex-direction: row;
     margin: 0;
-    animation: bgColorChange 25s infinite linear;
+    padding: 0;
+    overflow-x: hidden;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.container {
-    width: 500px;
-    height: fit-content;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    /* border: 2px solid black; */
-    flex-direction: column;
-}
-
-.container .text-cont {
-    font-family: 'Noto Serif', serif;
-    font-weight: 400;
-    font-size: 15px;
-    text-align: start;
-    background-color: white;
-    width: 80%;
-    height: 80%;
-    padding: 10px 25px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0px;
-    text-align: center;
-}
-
-.container .login-cont {
-    font-family: 'Parkinsans', sans-serif;
-    background-color: white;
-    width: 80%;
-    height: 50%;
-    padding: 10px 25px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    flex-direction: column;
-}
-
-.logo {
-    width: 280px;
-    height: 85px;
-    padding-left: 20px;
-}
-
-.google {
-    width: 8%;
-    margin-right: 10px;
-}
-
-#loginBtn {
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #e7e5e5;
-    height: 30px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: .3s ease;
-    padding: 5px 0px;
-    width: 90%;
-    margin-bottom: 15px;
-}
-
-#loginBtn:hover {
-    background-color: #f3eadb;
-}
-
-#loginBtn:active {
-    background-color: #c0b7a9;
-}
 
 .preview {
-    height: 100vh;
-    width: 70%;
+    height: 88vh;
+    width: 60%;
+    background-image: url('res/preview_1.png');
     background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
-    transition: background-image 1s ease-in-out;
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    transition: .5s ease;
 }
 
-@media (max-width: 700px) {
-    body {
-        justify-content: center;
-        padding: 10px;
-        margin: 10px;
-    }
-    .container {
-        width: 100%;
-        height: fit-content;
-    }
-    .container .text-cont {
-        width: 300px;
-        margin-bottom: 20px;
-    }
-    
-    .container .login-cont {
-        width: 300px;
-    }
-
-    .preview {
-        visibility: hidden;
-    }
+.title {
+    margin-left: 10%;
+    font-size: 70px;
+    margin-bottom: 0;
+    font-weight: 500;
+    line-height: .8;
 }
 
-@keyframes bgColorChange {
-    0% {
-        background-color: #FCF596;
-    }
-    25% {
-        background-color: #FBD288;
-    }
-    55% {
-        background-color: #FF9C73;
-    }
-    90% {
-        background-color: #FF4545;
-    }
-    100% {
-        background-color: #FCF596;
-    }
+.description {
+    font-weight: 300;
+    color: #e5e5e5;
+    margin-left: 11%;
+    width: 60%;
+    margin-top: 23px;
 }
 
-/* #FCF596
-#FBD288
-#FF9C73
-#FF4545 */
+.get-started {
+    font-family: 'Inter', sans-serif;
+    color: white;
+    height: 87vh;
+    width: 38%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.start {
+    font-weight: 500;
+    font-size: 50px;
+    margin-bottom: -5px;
+    margin-top: 10vh;
+}
+
+.items {
+    display: flex;
+    width: 100%;
+    height: 35vh;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.item {
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 29%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    user-select: none;
+    margin-bottom: 30px;
+}
+
+.item .icon {
+    cursor: pointer;
+    background-color: #0a5e36;
+    border-radius: 50%;
+    height: 20vh;
+    width: 20vh;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0px 0px 38px 2px rgba(12,110,61,.54);
+    -moz-box-shadow: 0px 0px 38px 2px rgba(12,110,61,.54);
+    box-shadow: 0px 0px 38px 2px rgba(12,110,61,.54);
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: .3s ease;
+}
+
+.icon:hover {
+    transform: scale(.9);
+}
+
+.icon.add {
+    background-image: url('res/add_recipe.png');
+    background-size: 60%;
+}
+
+.icon.book {
+    background-image: url('res/recipe_book.png');
+    background-size: 85%;
+}
+
+.icon.get {
+    background-image: url('res/recipe_generator.png');
+    background-size: 80%;
+}
+
+h3 {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 18px;
+    color: #92a795;
+    letter-spacing: 0.076px;
+    cursor: pointer;
+    margin-top: -10px;
+    border-bottom: 4px solid transparent;
+    border-image: linear-gradient(to right, #111212, #0a5e36, #111212);
+    border-image-slice: 1;
+}
+
+h3:hover {  
+    color: #0d8e52;
+}
+
+.h3-1 {
+    color: #09683b;
+    border: none;
+}
+
+.google_logo {
+    width: 15%;
+    margin-left: 10px;
+}

@@ -1,6 +1,6 @@
 body {
     min-height: 90vh;
-    background-color: #fafafa;
+    background-color: #111212;
     padding: 0;
     margin: 0;
 }
@@ -26,53 +26,54 @@ body {
 }
 
 h1 {
-    font-family: 'Parkinsans', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 70px;
     margin: 0;
-    font-weight: 1000;
+    font-weight: 600;
+    color: white;
 }
 
 h3 {
     padding: 10px 1%;
-    font-family: 'Fuzzy Bubbles', serif;
+    font-family: 'Inter', serif;
     font-size: 30px;
     margin: 0;
-    font-weight: 600;
+    font-weight: 400;
     width: 98%;
     color: white;
-    background: linear-gradient(45deg, #ffab7e, #ff7575, #ff6a65);
+    background: linear-gradient(45deg, #0a5e36, #033a20);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 
 h4 {
-    font-family: 'Parkinsans', sans-serif;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
 }
 
 .explore {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 400px;
+    height: 300px;
     width: 100%;
 }
 
 .explore .explore-grid {
     display: grid;
-    height: 350px;
+    height: 250px;
     width: 100%;
-    background-color: #e4e4e4;
+    background-color: #272926;
     grid-template-columns: auto;
     grid-template-rows: auto;
     grid-auto-flow: column;
     gap: 10px;
     justify-items: center;
     place-items: center;
-    -webkit-box-shadow: 9px 12px 14px -8px rgba(0,0,0,0.49);
-    -moz-box-shadow: 9px 12px 14px -8px rgba(0,0,0,0.49);
-    box-shadow: 9px 12px 14px -8px rgba(0,0,0,0.49);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    color: white;
+    
 }
 
 .item {
@@ -80,35 +81,43 @@ h4 {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    height: 320px;
-    width: 280px;
+    height: 220px;
+    width: 180px;
     border-radius: 24px;
+    margin-top: 30px;
 }
 
 .icons {
-    width: 250px;
-    height: 250px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    background-color: #fff;
+    background-color: #0a5e36;
     background-position: center;
     background-size: contain;
+    -webkit-box-shadow: 0px 0px 38px 2px rgba(12,110,61,.54);
+    -moz-box-shadow: 0px 0px 38px 2px rgba(12,110,61,.54);
+    box-shadow: 0px 0px 38px 2px rgba(12,110,61,.54);
+    background-repeat: no-repeat;
 }
 
 .icons.book {
     background-image: url('res/recipe_book.png');
+    background-size: 85%;
 }
 
 .icons.generator {
     background-image: url('res/recipe_generator.png');
+    background-size: 80%;
 }
 
 .icons.add {
     background-image: url('res/add_recipe.png');
-    background-size: 90%;
+    background-size: 60%;
 }
 
 .recommendations {
-    height: 400px;
+    margin-top: 30px;
+    height: 300px;
     width: 100%;
     border: 1px dashed green;
 }

@@ -1,7 +1,7 @@
 .nav {
     width: 98%;
     height: 60px;
-    background: linear-gradient(45deg, #ffab7e, #ff7575, #ff6a65);
+    background: linear-gradient(45deg, #003e19, #082c14);
     backdrop-filter: blur(2px);
     display: flex;
     flex-direction: row;
@@ -43,11 +43,11 @@
 
 .logoutButton:hover {
     color: white;
-    background-color: #ff8045;
+    background-color: #084322;
 }
 
 .logoutButton:active {
     color: gray;
-    background-color: #f4c312;
+    background-color: #06391c;
     user-select: none;
 }
