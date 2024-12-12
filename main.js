@@ -34,7 +34,7 @@ function login() {
     const userID = user.uid;
     localStorage.setItem("userID", userID);
     localStorage.setItem("displayName", displayName);
-    window.location.href = "home.html";
+    window.location.href = "/home";
   }).catch((error)=> {
     const errorCode = error.code;
     const errorMessage = error.message;

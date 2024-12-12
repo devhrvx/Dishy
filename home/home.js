@@ -25,7 +25,7 @@ onAuthStateChanged(auth, (user) => {
     
   } else {
     console.log("No user is signed in.");
-    window.location.href = "index.html";
+    window.location.href = "../";
   }
 });
 
@@ -33,9 +33,22 @@ logoutButton.addEventListener('click', () => {
     signOut(auth)
         .then(() => {
             console.log("User logged out successfully.");
-            window.location.href = "index.html";
+            window.location.href = "../";
         })
         .catch((error) => {
             console.error("Error logging out:", error);
         });
+});
+
+
+$(".item.add").click(function () {
+  window.location.href = "../add-recipe";
+});
+
+$(".item.book").click(function () {
+  window.location.href = "../recipe-book";
+});
+
+$(".item.generator").click(function () {
+  window.location.href = "../generator";
 });
