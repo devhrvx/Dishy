@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-import { signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDvXage0SbYUMV8RFZzn48ANw4GX_D6Zfo",
@@ -14,27 +14,138 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 var logoutButton = document.querySelector('.logoutButton');
 
+let userId = null;
+
 onAuthStateChanged(auth, (user) => {
-  if (user) {
-      console.log("User in add-recipe: " + user.displayName);
-      console.log("User ID: " + user.uid);
-    
-  } else {
-    console.log("No user is signed in.");
-    window.location.href = "../";
-  }
+	if (user) {
+		userId = user.uid;
+		console.log("User in add-recipe: " + user.displayName);
+		console.log("User ID: " + userId);
+	} else {
+		console.log("No user is signed in.");
+		window.location.href = "../";
+	}
 });
 
 logoutButton.addEventListener('click', () => {
-    signOut(auth)
-        .then(() => {
-            console.log("User logged out successfully.");
-            window.location.href = "../";
-        })
-        .catch((error) => {
-            console.error("Error logging out:", error);
+	signOut(auth)
+		.then(() => {
+			console.log("User logged out successfully.");
+			window.location.href = "../";
+		})
+		.catch((error) => {
+			console.error("Error logging out:", error);
+		});
+});
+
+let ingredients = [];
+
+$("#add.ingredient").click(function() {
+
+	if($("#ingredient").val() != '') {
+		var ingredient = $("#ingredient").val();
+		ingredients.push(ingredient);
+		displayIngredients(ingredients);
+		$("#ingredient").val('');
+	}
+	else {
+		alert('Please enter an ingredient');
+	}
+	
+	console.log(ingredients);
+
+});
+
+function displayIngredients(ingredients) {
+
+    const ingredientsList = $('.ingredients-list');
+
+    ingredientsList.empty();
+
+    ingredients.forEach((ingredient, index) => {
+        const ingredientItem = $('<div>').addClass('ingredient-item');
+
+        const ingredientName = $('<div>').addClass('ingredient-name').text(ingredient);
+        const deleteBtn = $('<div>').addClass('delete').text('X');
+
+        ingredientItem.append(ingredientName).append(deleteBtn);
+        ingredientsList.append(ingredientItem);
+
+        deleteBtn.on('click', function() {
+            ingredients.splice(index, 1);
+            displayIngredients(ingredients);
         });
+    });
+	
+}
+
+let procedures = [];
+
+$("#add.procedure").click(function() {
+
+	if($("#procedure").val() != '') {
+		var procedure = $("#procedure").val();
+		procedures.push(procedure);
+		displayProcedures(procedures);
+		$("#procedure").val('');
+	}
+	else {
+		alert('Please enter a procedure');
+	}
+	
+	console.log(procedures);
+
+});
+
+function displayProcedures(procedures) {
+
+    const proceduresList = $('.procedures-list');
+
+    proceduresList.empty();
+
+    procedures.forEach((procedure, index) => {
+        const procedureItem = $('<div>').addClass('procedure-item');
+
+        const procedureName = $('<div>').addClass('procedure-name').text(procedure);
+        const deleteBtn = $('<div>').addClass('delete').text('X');
+
+        procedureItem.append(procedureName).append(deleteBtn);
+        proceduresList.append(procedureItem);
+
+        deleteBtn.on('click', function() {
+            procedures.splice(index, 1);
+			displayProcedures(procedures)
+        });
+    });
+	
+}
+
+$(".save").click(async function () {
+	const dishName = $("#dishName").val();
+	const flavor = $("#flavor").val();
+	const difficulty = $("#difficulty").val();
+
+	if (dishName && flavor && ingredients.length > 0 && procedures.length > 0) {
+		try {
+			await addDoc(collection(db, "recipes"), {
+				userId: userId,
+				dishName: dishName,
+				flavor: flavor,
+				ingredients: ingredients,
+				procedures: procedures,
+				difficulty: difficulty,
+				createdAt: new Date(),
+			});
+			$("input").text('');
+		} catch (e) {
+			console.error("Error adding document: ", e);
+			alert("Error saving recipe");
+		}
+	} else {
+		alert("Please fill in all fields!");
+	}
 });

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="add-recipe.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <!-- Copy from here -->
     <link rel="stylesheet" href="../nav.css">
     <link rel="stylesheet" href="../scrollbar.css">
@@ -18,8 +19,49 @@
     <div class="nav">
         <div class="logo"></div>
         <div class="logoutButton">Logout</div>
-      </div>
+    </div>
 
+    <center><h1>Add your own recipe</h1></center>
+    <div class="container">
+        <div class="text">Dish name</div>
+        <input type="text" class="text-input" name="dishName" id="dishName" placeholder="Spaghetti of some sort...">
+
+        <div class="text">Flavor</div>
+        <input type="text" class="text-input" name="flavor" id="flavor" placeholder="Savory">
+
+        <div class="text">Ingredients</div>
+        <div class="separate">
+            <input type="text" class="text-input ingredient" name="ingredient" id="ingredient" placeholder="1 cup of tomato sauce...">
+            <button id="add" class="ingredient">Add</button>
+        </div>
+        
+        <div class="text">Ingredients List</div>
+        <div class="ingredients-list">
+
+        </div>
+
+        <div class="text">Procedure</div>
+        <div class="separate">
+            <input type="text" class="text-input procedure" name="procedure" id="procedure" placeholder="Boil 1 cup of pasta until al dente...">
+            <button id="add" class="procedure">Add</button>
+        </div>
+        
+        <div class="text">Procedures</div>
+        <div class="procedures-list">
+            
+        </div>
+
+        <div class="text">Difficulty</div>
+        <div class="last">
+            <select id="difficulty" name="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+
+            <button class="save">Save recipe!</button>
+        </div>
+    </div>
 <script src="add-recipe.js" type="module"></script>
 </body>
 </html>
