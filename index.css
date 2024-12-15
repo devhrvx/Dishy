@@ -8,6 +8,9 @@ body {
     overflow-x: hidden;
     justify-content: space-between;
     flex-wrap: wrap;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    padding-bottom: 20vh;
 }
 
 
@@ -144,4 +147,57 @@ h3:hover {
 .google_logo {
     width: 15%;
     margin-left: 10px;
+}
+
+.whats-dishy {
+    width: 95%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.whats-dishy.marginned {
+    margin-top: -10vh;
+}
+
+.what-info {
+    width: 40%;
+    height: 80%;
+    margin-right: 40px;
+}
+
+.what-info.right {
+    margin-right: 0;
+    margin-left: 40px;
+}
+
+h1 {
+    font-size: 80px;
+    font-weight: 500;
+}
+
+p {
+    color: #d2cece;
+    text-align: justify;
+    margin-top: -28px;
+    font-size: 18px;
+}
+
+.omelet,
+.database {
+    width: 40%;
+    height: 100%;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.omelet{
+    background-image: url('./res/omelet.png');
+}
+
+.database {
+    background-image: url('./res/database.png');
 }
