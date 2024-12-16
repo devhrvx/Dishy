@@ -140,7 +140,15 @@ $(".save").click(async function () {
 				difficulty: difficulty,
 				createdAt: new Date(),
 			});
+			$(".text-input").val('');
 			$("input").text('');
+			$("#difficulty").val('easy');
+			ingredients = [];
+            procedures = [];
+            displayIngredients(ingredients);
+            displayProcedures(procedures);
+
+			$("#popup").fadeIn();
 		} catch (e) {
 			console.error("Error adding document: ", e);
 			alert("Error saving recipe");
@@ -148,4 +156,8 @@ $(".save").click(async function () {
 	} else {
 		alert("Please fill in all fields!");
 	}
+});
+
+$("#closePopup").click(function () {
+    $("#popup").fadeOut();
 });

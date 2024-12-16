@@ -17,7 +17,7 @@
 </head>
 <body>
     <div class="nav">
-        <div class="logo"></div>
+        <div class="logo" onclick="window.location.href = '../home/'"></div>
         <div class="logoutButton">Logout</div>
     </div>
 
@@ -62,6 +62,16 @@
             <button class="save">Save recipe!</button>
         </div>
     </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <div class="check"></div>
+            <p id="text-rec">Recipe saved successfully!</p>
+            <button id="closePopup">OK</button>
+        </div>
+    </div>
+    
+
 <script src="../add-recipe/add-recipe.js" type="module"></script>
 </body>
 </html>
