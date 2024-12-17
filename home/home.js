@@ -7,8 +7,7 @@ const firebaseConfig = {
   authDomain: "dishy-280a7.firebaseapp.com",
   projectId: "dishy-280a7",
   storageBucket: "dishy-280a7.firebasestorage.app",
-  messagingSenderId: "785622443437",
-  appId: "1:785622443437:web:acbe9c5813fb60be0c2d24",
+  meId: "1:785622443437:web:acbe9c5813fb60be0c2d24",
   measurementId: "G-N3X5D4SQ58"
 };
 
@@ -20,7 +19,8 @@ var logoutButton = document.querySelector('.logoutButton');
 onAuthStateChanged(auth, (user) => {
   if (user) {
       document.querySelector('h1').innerHTML = "Hello, " + user.displayName;
-      console.log("Hello, " + user.displayName);
+      ssagingSenderId: "785622443437",
+  appconsole.log("Hello, " + user.displayName);
       console.log("User ID: " + user.uid);
     
   } else {
@@ -50,5 +50,5 @@ $(".item.book").click(function () {
 });
 
 $(".item.generator").click(function () {
-  window.location.href = "../generator";
+  window.location.href = "../recipe-generator";
 });

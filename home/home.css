@@ -127,3 +127,55 @@ h4 {
     width: 100%;
     border: 1px dashed green;
 }
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .greetings {
+        height: 120px;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+
+    h3 {
+        font-size: 24px;
+        padding: 8px 1%;
+    }
+
+    h4 {
+        text-align: center;
+    }
+
+    .explore {
+        height: auto;
+    }
+
+    .explore .explore-grid {
+        align-items: center;
+        justify-items: center;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 20px;
+        height: auto;
+    }
+
+    .item {
+        height: 180px;
+        width: 100%;
+    }
+
+    .icons {
+        width: 90px;
+        height: 90px;
+    }
+
+    .recommendations {
+        height: auto;
+        margin-top: 20px;
+    }
+}

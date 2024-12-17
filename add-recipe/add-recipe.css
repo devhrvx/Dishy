@@ -245,3 +245,83 @@ select {
     90% { background-color: #048704; }
     100% { background-color: #004d00; }
 }
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 40px;
+    }
+
+    .text {
+        font-size: 18px;
+    }
+
+    .text-input {
+        height: 30px;
+        font-size: 18px;
+    }
+
+    .text-input.ingredient,
+    .text-input.procedure {
+        width: 88%;
+    }
+
+    #add {
+        width: 30%;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    .ingredients-list,
+    .procedures-list {
+        overflow: auto;
+        height: 30vh;
+        padding: 10px;
+    }
+
+    .ingredient-item,
+    .procedure-item {
+        height: auto;
+    }
+
+    .ingredient-name,
+    .procedure-name {
+        height: auto;
+        padding: 10px;
+    }
+
+    .delete {
+        width: 10%;
+        height: 30px;
+    }
+
+    select {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .save {
+        width: 40%;
+        height: 30px;
+        font-size: 13px;
+    }
+
+    .popup {
+        width: 80%;
+        height: auto;
+    }
+
+    .popup-content {
+        font-size: 16px;
+        padding: 20px;
+    }
+
+    #closePopup {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

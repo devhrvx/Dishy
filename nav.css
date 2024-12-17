@@ -51,3 +51,11 @@
     background-color: #06391c;
     user-select: none;
 }
+
+@media (max-width: 768px) {
+    .nav {
+        width: 100%;
+        justify-content: space-around;
+        padding: 0;
+    }
+}
