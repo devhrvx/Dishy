@@ -52,7 +52,7 @@
     user-select: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .nav {
         width: 100%;
         justify-content: space-around;

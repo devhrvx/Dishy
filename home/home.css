@@ -128,7 +128,7 @@ h4 {
     border: 1px dashed green;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .container {
         width: 95%;
         padding: 10px;

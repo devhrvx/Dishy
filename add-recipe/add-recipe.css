@@ -246,7 +246,7 @@ select {
     100% { background-color: #004d00; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .container {
         width: 90%;
         padding: 20px;

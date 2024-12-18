@@ -202,7 +202,7 @@ p {
     background-image: url('./res/database.png');
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .preview {
         width: 100%;
         background-size: cover;
