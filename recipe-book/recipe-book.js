@@ -67,16 +67,19 @@ async function populateRecipes(userId) {
 		else {
 			diffEmoji = '👨‍🍳';
 		}
+
 		const recipeItem = `
 		  <div class="item" data-recipe='${JSON.stringify(recipe)}'>
 			<div class="dish-name">${recipe.dishName}</div>
 			<div class="difficulty">Difficulty: ${diffEmoji}</div>
 			<div class="flavor">${recipe.flavor}</div>
-		  </div>
-		`;
+		  </div>`;
+
 		$(".container").append(recipeItem);
 	  });
-	} catch (error) {
+	}
+	
+	catch (error) {
 	  console.error("Error fetching recipes:", error);
 	}
 }
@@ -84,16 +87,18 @@ async function populateRecipes(userId) {
 
 $(document).on("click", ".item", function() {
 	const recipe = $(this).data("recipe");
-  
+	console.log(recipe);
 	
 	$("#popup-dishName").text(recipe.dishName);
 	$("#popup-flavor").text(recipe.flavor);
 	$("#popup-difficulty").text(recipe.difficulty);
+
 	$("#popup-ingredients").empty();
 		recipe.ingredients.forEach(ingredient => {
   		const listItem = `<li>${ingredient}</li>`;
   		$("#popup-ingredients").append(listItem);
 	});
+
 	$("#popup-procedures").empty();
 		recipe.procedures.forEach(procedure => {
   		const listProcedure = `<li>${procedure}</li>`;
