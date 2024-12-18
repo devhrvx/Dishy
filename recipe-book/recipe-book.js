@@ -42,6 +42,8 @@ logoutButton.addEventListener('click', () => {
 		});
 });
 
+let diffEmoji;
+
 async function populateRecipes(userId) {
 	const recipesRef = collection(db, "recipes");
 	const q = query(
@@ -56,7 +58,6 @@ async function populateRecipes(userId) {
   
 	  querySnapshot.forEach((doc) => {
 		const recipe = doc.data();
-		let diffEmoji;
 
 		if (recipe.difficulty == 'hard' ) {
 			diffEmoji = '👨‍🍳👨‍🍳👨‍🍳';
@@ -68,14 +69,17 @@ async function populateRecipes(userId) {
 			diffEmoji = '👨‍🍳';
 		}
 
-		const recipeItem = `
-		  <div class="item" data-recipe='${JSON.stringify(recipe)}'>
+		const recipeItemHTML = `
+		  <div class="item" data-recipe='${JSON.stringify(recipe)}' style='display: none;'>
 			<div class="dish-name">${recipe.dishName}</div>
 			<div class="difficulty">Difficulty: ${diffEmoji}</div>
 			<div class="flavor">${recipe.flavor}</div>
 		  </div>`;
 
-		$(".container").append(recipeItem);
+		const $recipeItem = $(recipeItemHTML);
+		$(".container").append($recipeItem);
+		$recipeItem.fadeIn(300);
+
 	  });
 	}
 	
@@ -91,7 +95,7 @@ $(document).on("click", ".item", function() {
 	
 	$("#popup-dishName").text(recipe.dishName);
 	$("#popup-flavor").text(recipe.flavor);
-	$("#popup-difficulty").text(recipe.difficulty);
+	$("#popup-difficulty").text(diffEmoji);
 
 	$("#popup-ingredients").empty();
 		recipe.ingredients.forEach(ingredient => {
