@@ -76,11 +76,22 @@ $(document).ready(async () => {
   }
 });
 
+let diffEmoji;
+
 function showRecipePopup(recipe) {
   const $popup = $("#popup");
   $popup.find("#popup-dishName").text(recipe.dishName);
   $popup.find("#popup-flavor").text(recipe.flavor);
-  $popup.find("#popup-difficulty").text(recipe.difficulty);
+  if (recipe.difficulty == 'hard' ) {
+    diffEmoji = '👨‍🍳👨‍🍳👨‍🍳';
+  }
+  else if (recipe.difficulty == 'medium'){
+    diffEmoji = '👨‍🍳👨‍🍳';
+  }
+  else {
+    diffEmoji = '👨‍🍳';
+  }
+  $popup.find("#popup-difficulty").text(diffEmoji);
   $popup.find("#popup-ingredients").html(recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join(""));
   $popup.find("#popup-procedures").html(recipe.procedures.map(procedure => `<li>${procedure}</li>`).join(""));
 
@@ -96,10 +107,19 @@ function displayRecipes(recipes) {
   $recipeGrid.empty(); //clear for the loader
 
   recipes.forEach((recipe) => {
+    if (recipe.difficulty == 'hard' ) {
+      diffEmoji = '👨‍🍳👨‍🍳👨‍🍳';
+    }
+    else if (recipe.difficulty == 'medium'){
+      diffEmoji = '👨‍🍳👨‍🍳';
+    }
+    else {
+      diffEmoji = '👨‍🍳';
+    }
     const $recipeItem = $(`
       <div class="recipe-item" data-recipe='${JSON.stringify(recipe)}'>
         <div class="dish-name">${recipe.dishName}</div>
-        <div class="difficulty">Difficulty: ${recipe.difficulty}</div>
+        <div class="difficulty">Difficulty: ${diffEmoji}</div>
         <div class="flavor">${recipe.flavor}</div>
       </div>
     `);
