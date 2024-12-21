@@ -9,7 +9,7 @@ const openai = new OpenAI({
 });
 
 
-app.post("/api/get-recipe", async (request, result) => {
+app.post("../api/get-recipe", async (request, result) => {
     const { dishType, flavor, difficulty, count } = request.body;
 
     try {
