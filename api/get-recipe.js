@@ -15,14 +15,16 @@ app.post("/api/get-recipe", async (request, result) => {
 
     try {
         const prompt = `
-            Generate ${count || "3"} recipes for a ${dishType || "dish"} with a ${flavor || "balanced"} flavor, and ${difficulty || "easy"} difficulty.
-            Include:
-            - Dish Name
-            - Flavor Description
-            - Difficulty Level (easy, medium, hard)
-            - List of Ingredients (as an array)
-            - Step-by-Step Procedures (as an array)
-        `;
+            Generate ${dishType || "any"} ${count || "3"} recipes in strict JSON format:
+            [
+              {
+                "dishName": "Dish Name",
+                "flavor": ${flavor || "any"},
+                "difficulty": ${difficulty || "easy"},
+                "ingredients": ["Ingredient1", "Ingredient2"],
+                "procedures": ["Step1", "Step2"]
+              }
+            ]`;
 
         const response = await openai.createCompletion({
             model: "gpt-3.5-turbo",
@@ -50,23 +52,15 @@ function parseRecipes(recipesText) {
   
 function parseRecipe(recipeText) {
     const lines = recipeText.split("\n").filter((line) => line.trim() !== "");
-    const dishName = lines[0].replace("Dish Name: ", "").trim();
-    const flavor = lines[1].replace("Flavor: ", "").trim();
-    const difficulty = lines[2].replace("Difficulty: ", "").trim();
+    const dishName = lines.find((line) => line.startsWith("Dish Name: "))?.replace("Dish Name: ", "").trim() || "Unknown Dish";
+    const flavor = lines.find((line) => line.startsWith("Flavor: "))?.replace("Flavor: ", "").trim() || "Unknown Flavor";
+    const difficulty = lines.find((line) => line.startsWith("Difficulty: "))?.replace("Difficulty: ", "").trim() || "Unknown Difficulty";
   
     const ingredientsStart = lines.indexOf("Ingredients:") + 1;
     const proceduresStart = lines.indexOf("Procedures:") + 1;
   
-    const ingredients = [];
-    const procedures = [];
-  
-    for (let i = ingredientsStart; i < proceduresStart - 1; i++) {
-      ingredients.push(lines[i].trim());
-    }
-  
-    for (let i = proceduresStart; i < lines.length; i++) {
-      procedures.push(lines[i].trim());
-    }
+    const ingredients = lines.slice(ingredientsStart, proceduresStart - 1).filter((line) => line);
+    const procedures = lines.slice(proceduresStart).filter((line) => line);
   
     return {
       dishName,
@@ -75,7 +69,8 @@ function parseRecipe(recipeText) {
       ingredients,
       procedures,
     };
-}
+  }
+  
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
