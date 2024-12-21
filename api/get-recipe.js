@@ -13,36 +13,32 @@ app.post("/api/get-recipe", async (request, result) => {
     const { dishType, flavor, difficulty, count } = request.body;
 
     try {
-            const response = await openai.createChatCompletion({
-                model: "gpt-3.5-turbo",
-                messages: [
-                    {
-                        role: "user",
-                        content: `
-                            Generate ${dishType || "any"} ${count || "3"} recipes in strict JSON format:
-                            [
-                              {
-                                "dishName": "Dish Name",
-                                "flavor": "${flavor || "any"}",
-                                "difficulty": "${difficulty || "easy"}",
-                                "ingredients": ["Ingredient1", "Ingredient2"],
-                                "procedures": ["Step1", "Step2"]
-                              }
-                            ]
-                            Make sure the response is a valid JSON array and nothing else.`
-                    },
 
-                    {
-                        role: "system",
-                        content: "You are a recipe generator."
-                    }
-                ],
-                max_tokens: 500,
-                temperature: 0.7,
-            });
+        const prompt = `
+                Generate ${dishType || "any"} ${count || "3"} recipes in strict JSON format:
+                [
+                  {
+                    "dishName": "Dish Name",
+                    "flavor": "${flavor || "any"}",
+                    "difficulty": "${difficulty || "easy"}",
+                    "ingredients": ["Ingredient1", "Ingredient2"],
+                    "procedures": ["Step1", "Step2"]
+                  }
+                ]
+                Make sure the response is a valid JSON array and nothing else.`;
+                
+        const response = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: [
+              { role: "system", content: "You are a helpful recipe generator." },
+              { role: "user", content: prompt },
+            ],
+            temperature: 0.7,
+        });
+              
             
 
-        const recipeText = response.data.choices[0].text.trim();
+        const recipeText = response.choices[0].message.content.trim();
         const recipes = parseRecipes(recipeText);
 
         result.status(200).json({ success: true, recipes });
@@ -55,12 +51,8 @@ app.post("/api/get-recipe", async (request, result) => {
 });
 
 function parseRecipes(recipesText) {
-    try {
-        return JSON.parse(recipesText);
-    } catch (error) {
-        console.error("Error parsing JSON:", error);
-        return [];
-    }
+    const recipeBlocks = recipesText.split("\n\n").filter((block) => block.trim() !== "");
+    return recipeBlocks.map((block) => parseRecipe(block));
 }
 
   
