@@ -3,6 +3,8 @@ body {
     background-color: #111212;
     padding: 0;
     margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: white;
 }
 
 .container {
