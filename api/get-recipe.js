@@ -8,51 +8,45 @@ const openai = new OpenAI({
   apiKey: process.env.OPEN_AI_KEY,
 });
 
-
 app.post("/api/get-recipe", async (request, result) => {
-    const { dishType, flavor, difficulty, count } = request.body;
+  const { dishType, flavor, difficulty, count } = request.body;
 
-    try {
+  try {
+    const prompt = `
+      Generate ${dishType || "any"} ${count || "3"} recipes in strict JSON format:
+      [
+        {
+          "dishName": "Dish Name",
+          "flavor": "${flavor || "any"}",
+          "difficulty": "${difficulty || "easy"}",
+          "ingredients": ["Ingredient1", "Ingredient2"],
+          "procedures": ["Step1", "Step2"]
+        }
+      ]
+      Ensure that the response is a valid JSON array and nothing else. Don't include extra text or explanations.
+      Only return the JSON array with the recipe data.
+    `;
 
-        const prompt = `
-            Generate ${dishType || "any"} ${count || "3"} recipes in strict JSON format:
-            [
-              {
-                "dishName": "Dish Name",
-                "flavor": "${flavor || "any"}",
-                "difficulty": "${difficulty || "easy"}",
-                "ingredients": ["Ingredient1", "Ingredient2"],
-                "procedures": ["Step1", "Step2"]
-              }
-            ]
-            Ensure that the JSON is correctly formatted with no additional explanation or text.
-            Only return the JSON array with the recipe data.
-            `;
+    const response = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [
+        { role: "system", content: "You are a helpful recipe generator." },
+        { role: "user", content: prompt },
+      ],
+      temperature: 0.7,
+    });
 
-                
-        const response = await openai.chat.completions.create({
-            model: "gpt-3.5-turbo",
-            messages: [
-              { role: "system", content: "You are a helpful recipe generator." },
-              { role: "user", content: prompt },
-            ],
-            temperature: 0.7,
-        });
-              
-            
+    const recipes = JSON.parse(response.choices[0].message.content.trim());
 
-        const recipeText = response.choices[0].message.content.trim();
-        const recipes = parseRecipes(recipeText);
-
-        result.status(200).json({ success: true, recipes });
-        console.log(response.choices[0].message.content.trim());
-    }
-    
-    catch (error) {
-        console.error("Error generating recipe:", error);
-        result.status(500).json({ success: false, message: "Failed to generate recipe" });
-    }
+    result.status(200).json({ success: true, recipes });
+  } catch (error) {
+    console.error("Error generating recipe:", error);
+    result.status(500).json({ success: false, message: "Failed to generate recipe" });
+  }
 });
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 function parseRecipes(recipesText) {
     const recipeBlocks = recipesText.split("\n\n").filter((block) => block.trim() !== "");
@@ -79,8 +73,4 @@ function parseRecipe(recipeText) {
       ingredients,
       procedures,
     };
-  }
-  
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
