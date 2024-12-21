@@ -25,7 +25,8 @@ app.post("/api/get-recipe", async (request, result) => {
                 "procedures": ["Step1", "Step2"]
               }
             ]
-            Make sure the response is a valid JSON array and nothing else. Don't include extra text or explanations.
+            Ensure that the JSON is correctly formatted with no additional explanation or text.
+            Only return the JSON array with the recipe data.
             `;
 
                 
@@ -44,6 +45,7 @@ app.post("/api/get-recipe", async (request, result) => {
         const recipes = parseRecipes(recipeText);
 
         result.status(200).json({ success: true, recipes });
+        console.log(response.choices[0].message.content.trim());
     }
     
     catch (error) {
