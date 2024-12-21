@@ -25,6 +25,7 @@ app.post("/api/get-recipe", async (request, result) => {
       ]
       Ensure that the response is a valid JSON array and nothing else. Don't include extra text or explanations.
       Only return the JSON array with the recipe data.
+      All one word words should start uppercase letter.
     `;
 
     const response = await openai.chat.completions.create({
