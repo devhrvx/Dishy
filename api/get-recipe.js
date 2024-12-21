@@ -15,17 +15,19 @@ app.post("/api/get-recipe", async (request, result) => {
     try {
 
         const prompt = `
-                Generate ${dishType || "any"} ${count || "3"} recipes in strict JSON format:
-                [
-                  {
-                    "dishName": "Dish Name",
-                    "flavor": "${flavor || "any"}",
-                    "difficulty": "${difficulty || "easy"}",
-                    "ingredients": ["Ingredient1", "Ingredient2"],
-                    "procedures": ["Step1", "Step2"]
-                  }
-                ]
-                Make sure the response is a valid JSON array and nothing else.`;
+            Generate ${dishType || "any"} ${count || "3"} recipes in strict JSON format:
+            [
+              {
+                "dishName": "Dish Name",
+                "flavor": "${flavor || "any"}",
+                "difficulty": "${difficulty || "easy"}",
+                "ingredients": ["Ingredient1", "Ingredient2"],
+                "procedures": ["Step1", "Step2"]
+              }
+            ]
+            Make sure the response is a valid JSON array and nothing else. Don't include extra text or explanations.
+            `;
+
                 
         const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
