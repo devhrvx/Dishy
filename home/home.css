@@ -139,6 +139,7 @@ h4 {
     margin-bottom: 10vh;
     display: grid;
     justify-items: center;
+    align-items: center;
     grid-template-columns: repeat(3, 1fr);
     gap: 0px 36px;
     padding-top: 20px;
@@ -241,8 +242,6 @@ strong {
 }
 
 .loader {
-    position: absolute;
-    top: 50%;
     width: 80px;
     height: 40px;
     border-radius: 0 0 100px 100px;
@@ -276,8 +275,8 @@ strong {
     mask-composite:exclude,add,add,add,add,add,add;
     -webkit-mask-repeat: no-repeat;
     animation: l8 3s infinite;
-  }
-  @keyframes l8 {
+}
+@keyframes l8 {
    0%   {-webkit-mask-size: auto,0 0,0 0,0 0,0 0,0 0,0 0}
    15%  {-webkit-mask-size: auto,20px 20px,0 0,0 0,0 0,0 0,0 0}
    30%  {-webkit-mask-size: auto,20px 20px,20px 20px,0 0,0 0,0 0,0 0}
@@ -285,7 +284,7 @@ strong {
    60%  {-webkit-mask-size: auto,20px 20px,20px 20px,20px 20px,20px 20px,0 0,0 0}
    75%  {-webkit-mask-size: auto,20px 20px,20px 20px,20px 20px,20px 20px,20px 20px,0 0}
    90%,
-   100% {-webkit-mask-size: auto,20px 20px,20px 20px,20px 20px,20px 20px,20px 20px,20px 20px}
+   100% {-webkit-mask-size: auto,20px 20px,20px 20px,20px 20px,20px 20px,20px 20px}
 }
 
 @media (max-width: 800px) {
