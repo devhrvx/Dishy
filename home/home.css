@@ -137,7 +137,7 @@ h4 {
     margin: 0 auto;
     overflow: hidden;
     margin-bottom: 10vh;
-    display: grid;
+    display: flex;
     justify-items: center;
     align-items: center;
     grid-template-columns: repeat(3, 1fr);
@@ -242,6 +242,7 @@ strong {
 }
 
 .loader {
+    margin: 0 auto;
     width: 80px;
     height: 40px;
     border-radius: 0 0 100px 100px;
@@ -276,6 +277,7 @@ strong {
     -webkit-mask-repeat: no-repeat;
     animation: l8 3s infinite;
 }
+
 @keyframes l8 {
    0%   {-webkit-mask-size: auto,0 0,0 0,0 0,0 0,0 0,0 0}
    15%  {-webkit-mask-size: auto,20px 20px,0 0,0 0,0 0,0 0,0 0}
@@ -341,6 +343,7 @@ strong {
     .recipe-grid {
         grid-template-columns: 1fr;
         gap: 20px;
+        overflow-y: auto;
     }
 
     .loader {

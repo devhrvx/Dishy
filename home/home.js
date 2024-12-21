@@ -68,6 +68,7 @@ $(document).ready(async () => {
     const data = await response.json();
     if (data.success) {
       displayRecipes(data.recipes);
+      $(".recipe-grid").css("display", "grid");
     } else {
       console.error("Failed to fetch recipes");
     }
