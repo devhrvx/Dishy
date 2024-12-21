@@ -1,37 +1,52 @@
-import express from "express";
 import { Configuration, OpenAIApi } from "openai";
 
-const app = express();
-app.use(express.json());
+const configuration = new Configuration({
+  apiKey: process.env.OPEN_AI_KEY,
+});
 
-const openai = new OpenAIApi(
-    new Configuration({
-        apiKey: process.env.OPEN_AI_KEY,
-    })
-);
+const openai = new OpenAIApi(configuration);
+
+(async () => {
+  const response = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: "Hello, world!" }],
+  });
+
+  console.log(response.data.choices[0].message.content);
+})();
 
 app.post("/api/get-recipe", async (request, result) => {
     const { dishType, flavor, difficulty, count } = request.body;
 
     try {
-        const prompt = `
-            Generate ${dishType || "any"} ${count || "3"} recipes in strict JSON format:
-            [
-              {
-                "dishName": "Dish Name",
-                "flavor": ${flavor || "any"},
-                "difficulty": ${difficulty || "easy"},
-                "ingredients": ["Ingredient1", "Ingredient2"],
-                "procedures": ["Step1", "Step2"]
-              }
-            ]`;
+            const response = await openai.createChatCompletion({
+                model: "gpt-3.5-turbo",
+                messages: [
+                    {
+                        role: "user",
+                        content: `
+                            Generate ${dishType || "any"} ${count || "3"} recipes in strict JSON format:
+                            [
+                              {
+                                "dishName": "Dish Name",
+                                "flavor": "${flavor || "any"}",
+                                "difficulty": "${difficulty || "easy"}",
+                                "ingredients": ["Ingredient1", "Ingredient2"],
+                                "procedures": ["Step1", "Step2"]
+                              }
+                            ]
+                            Make sure the response is a valid JSON array and nothing else.`
+                    },
 
-        const response = await openai.createCompletion({
-            model: "gpt-3.5-turbo",
-            prompt,
-            max_tokens: 500,
-            temperature: 0.7,
-        });
+                    {
+                        role: "system",
+                        content: "You are a recipe generator."
+                    }
+                ],
+                max_tokens: 500,
+                temperature: 0.7,
+            });
+            
 
         const recipeText = response.data.choices[0].text.trim();
         const recipes = parseRecipes(recipeText);
@@ -46,9 +61,14 @@ app.post("/api/get-recipe", async (request, result) => {
 });
 
 function parseRecipes(recipesText) {
-    const recipeBlocks = recipesText.split("\n\n").filter((block) => block.trim() !== "");
-    return recipeBlocks.map((block) => parseRecipe(block));
+    try {
+        return JSON.parse(recipesText);
+    } catch (error) {
+        console.error("Error parsing JSON:", error);
+        return [];
+    }
 }
+
   
 function parseRecipe(recipeText) {
     const lines = recipeText.split("\n").filter((line) => line.trim() !== "");
