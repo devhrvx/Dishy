@@ -29,6 +29,7 @@ app.post("/api/get-recipe", async (request, result) => {
       No need to add numbers to steps on procedures.
       Add accurate quantity/measurements and units for ingredients.
       All should be grammatically correct.
+      The flavor(s) should start uppercase.
     `;
 
     const response = await openai.chat.completions.create({
