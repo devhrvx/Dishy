@@ -1,19 +1,13 @@
-import { Configuration, OpenAIApi } from "openai";
+import express from "express";
+import { OpenAI } from "openai";
 
-const configuration = new Configuration({
+const app = express();
+app.use(express.json());
+
+const openai = new OpenAI({
   apiKey: process.env.OPEN_AI_KEY,
 });
 
-const openai = new OpenAIApi(configuration);
-
-(async () => {
-  const response = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: "Hello, world!" }],
-  });
-
-  console.log(response.data.choices[0].message.content);
-})();
 
 app.post("/api/get-recipe", async (request, result) => {
     const { dishType, flavor, difficulty, count } = request.body;
