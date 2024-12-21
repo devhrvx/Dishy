@@ -173,7 +173,7 @@ h4 {
     font-size: 45px;
     font-weight: 700;
     text-align: left;
-    line-height: .9;
+    line-height: 1;
 }
 
 .difficulty {
@@ -227,7 +227,7 @@ strong {
   
 .close-btn {
     z-index: 999;
-    color: #f14040;
+    color: #ef2626;
     font-size: 28px;
     font-weight: bold;
     margin-left: 99%;
@@ -235,7 +235,7 @@ strong {
   
 .close-btn:hover,
 .close-btn:focus {
-    color: rgb(186, 9, 9);
+    color: rgb(251, 59, 59);
     text-decoration: none;
     cursor: pointer;
 }
