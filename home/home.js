@@ -52,7 +52,7 @@ $(".item.generator").click(function () {
 
 $(document).ready(async () => {
   try {
-    const response = await fetch("../api/get-recipe", {
+    const response = await fetch("/api/get-recipe", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
