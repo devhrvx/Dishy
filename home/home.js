@@ -93,7 +93,7 @@ $(".close-btn").click(() => {
 
 function displayRecipes(recipes) {
   const $recipeGrid = $(".recipe-grid");
-  $recipeGrid.empty();
+  $recipeGrid.empty(); //clear for the loader
 
   recipes.forEach((recipe) => {
     const $recipeItem = $(`
