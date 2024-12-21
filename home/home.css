@@ -337,4 +337,13 @@ strong {
         height: auto;
         margin-top: 20px;
     }
+
+    .recipe-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .loader {
+        margin: 0 auto;
+    }
 }
