@@ -19,8 +19,7 @@ var logoutButton = document.querySelector('.logoutButton');
 onAuthStateChanged(auth, (user) => {
   if (user) {
     document.querySelector('h1').innerHTML = "Hello, " + user.displayName;
-    ssagingSenderId: "785622443437",
-    appconsole.log("Hello, " + user.displayName);
+    console.log("Hello, " + user.displayName);
     console.log("User ID: " + user.uid);
   } else {
     console.log("No user is signed in.");
