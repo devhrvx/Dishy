@@ -41,7 +41,7 @@ To get started with Dishy!, simply visit the [Dishy! website](https://dishycook.
 
 ## Contributing
 
-We welcome contributions to improve Dishy!. If you have any suggestions or improvements, feel free to open an issue or submit a pull request on our [GitHub repository](https://github.com/your-repo).
+We welcome contributions to improve Dishy!. If you have any suggestions or improvements, feel free to open an issue or submit a pull request on our [GitHub repository](https://github.com/devhrvx/Dishy/).
 
 ## Contact
 
