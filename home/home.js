@@ -1,6 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDvXage0SbYUMV8RFZzn48ANw4GX_D6Zfo",
@@ -13,6 +15,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
+
+//userid
+let userId;
 
 var logoutButton = document.querySelector('.logoutButton');
 
@@ -21,6 +27,7 @@ onAuthStateChanged(auth, (user) => {
     document.querySelector('h1').innerHTML = "Hello, " + user.displayName;
     console.log("Hello, " + user.displayName);
     console.log("User ID: " + user.uid);
+    userId = user.uid;
   } else {
     console.log("No user is signed in.");
     window.location.href = "../";
@@ -99,8 +106,60 @@ function showRecipePopup(recipe) {
   $popup.show();
 }
 
+$(document).ready(function() {
+  $(".save").click(async function () {
+      const dishName = $("#popup-dishName").text();
+      const flavor = $("#popup-flavor").text();
+      const difficulty = $("#popup-difficulty").text();
+      const ingredients = $("#popup-ingredients li").map(function() {
+          return $(this).text();
+      }).get();
+      const procedures = $("#popup-procedures li").map(function() {
+          return $(this).text();
+      }).get();
+
+      if (dishName && flavor && ingredients.length > 0 && procedures.length > 0) {
+          try {
+              await addDoc(collection(db, "recipes"), {
+                  userId: userId,
+                  dishName: dishName,
+                  flavor: flavor,
+                  ingredients: ingredients,
+                  procedures: procedures,
+                  difficulty: difficulty,
+                  createdAt: new Date(),
+              });
+              $("#popup").fadeOut();
+              $(".saved").fadeIn();
+          } catch (e) {
+              console.error("Error adding document: ", e);
+              alert("Error saving recipe");
+          }
+      } else {
+          alert("An error occurred.");
+      }
+  });
+});
+
+
+$("#closePopup").click(() => {
+  $(".saved").fadeOut();
+});
+
 $(".close-btn").click(() => {
   $("#popup").hide();
+});
+
+const sample = {
+  dishName: "Sample",
+  flavor: "Sample",
+  difficulty: "easy",
+  ingredients: ["Sample", "Sample"],
+  procedures: ["Sample", "Sample"]
+};
+
+$("#show").click(() => {
+  showRecipePopup(sample);
 });
 
 function displayRecipes(recipes) {

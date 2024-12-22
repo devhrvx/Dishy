@@ -30,7 +30,7 @@ h1 {
 .item {
     height: 40vh;
     width: 100%;
-    background-color: #153f02;
+    background-color: #0a5e36;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -43,7 +43,7 @@ h1 {
 }
 
 .item:hover {
-    background-color: #1e5504;
+    background-color: #0d673c;
 }
 
 .dish-name {

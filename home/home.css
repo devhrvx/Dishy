@@ -278,6 +278,101 @@ strong {
     animation: l8 3s infinite;
 }
 
+.save {
+    border-radius: 8px;
+    border: none;
+    width: 90%;
+    height: 30px;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s ease;
+    animation: changing linear infinite 3s;
+    margin-left: 5%;
+    margin-top: 2%;
+}
+
+.save:hover {
+    background-color: #fff;
+    color: rgb(255, 255, 255);
+}
+
+.save:active {
+    background-color: #122c03;
+    color: yellow;
+}
+
+
+.saved {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 20%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.check {
+    width: 90px;
+    height: 90px;
+    background-image: url('../res/check.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0 auto -10px auto;
+}
+
+.saved-content {
+    font-size: 20px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 30px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
+#text-rec {
+    margin-bottom: -10px;
+    color: black;
+}
+
+#closePopup {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #006405;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#closePopup:hover {
+    background-color: #048704;
+}
+
+
+@keyframes changing {
+    0% { background-color: #004d00; }
+    10% { background-color: #057105; }
+    20% { background-color: #139b13; }
+    30% { background-color: #006b00; }
+    40% { background-color: #1eb503; }
+    50% { background-color: #0fa80f; }
+    60% { background-color: #097c09; }
+    70% { background-color: #009300; }
+    80% { background-color: #048c04; }
+    90% { background-color: #048704; }
+    100% { background-color: #004d00; }
+}
+
 @keyframes l8 {
    0%   {-webkit-mask-size: auto,0 0,0 0,0 0,0 0,0 0,0 0}
    15%  {-webkit-mask-size: auto,20px 20px,0 0,0 0,0 0,0 0,0 0}
