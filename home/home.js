@@ -106,41 +106,42 @@ function showRecipePopup(recipe) {
   $popup.show();
 }
 
-$(document).ready(function() {
-  $(".save").click(async function () {
-      const dishName = $("#popup-dishName").text();
-      const flavor = $("#popup-flavor").text();
-      const difficulty = $("#popup-difficulty").text();
-      const ingredients = $("#popup-ingredients li").map(function() {
-          return $(this).text();
-      }).get();
-      const procedures = $("#popup-procedures li").map(function() {
-          return $(this).text();
-      }).get();
 
-      if (dishName && flavor && ingredients.length > 0 && procedures.length > 0) {
-          try {
-              await addDoc(collection(db, "recipes"), {
-                  userId: userId,
-                  dishName: dishName,
-                  flavor: flavor,
-                  ingredients: ingredients,
-                  procedures: procedures,
-                  difficulty: difficulty,
-                  createdAt: new Date(),
-              });
-              $("#popup").fadeOut();
-              $(".saved").fadeIn();
-          } catch (e) {
-              console.error("Error adding document: ", e);
-              alert("Error saving recipe");
-          }
-      } else {
-          alert("An error occurred.");
-      }
-  });
+$(".save").click(async function () {
+    const dishName = $("#popup-dishName").text();
+    const flavor = $("#popup-flavor").text();
+    const difficulty = $("#popup-difficulty").text();
+    const ingredients = $("#popup-ingredients li").map(function() {
+        return $(this).text();
+    }).get();
+    const procedures = $("#popup-procedures li").map(function() {
+        return $(this).text();
+    }).get();
+
+    if (dishName && flavor && ingredients.length > 0 && procedures.length > 0) {
+        try {
+            await addDoc(collection(db, "recipes"), {
+                userId: userId,
+                dishName: dishName,
+                flavor: flavor,
+                ingredients: ingredients,
+                procedures: procedures,
+                difficulty: difficulty,
+                createdAt: new Date(),
+            });
+            $("#popup").fadeOut();
+            $(".saved").fadeIn();
+        }
+        catch (e) {
+            console.error("Error adding document: ", e);
+            alert("Error saving recipe");
+        }
+    }
+    
+    else {
+        alert("An error occurred.");
+    }
 });
-
 
 $("#closePopup").click(() => {
   $(".saved").fadeOut();
@@ -149,14 +150,6 @@ $("#closePopup").click(() => {
 $(".close-btn").click(() => {
   $("#popup").hide();
 });
-
-const sample = {
-  dishName: "Sample",
-  flavor: "Sample",
-  difficulty: "easy",
-  ingredients: ["Sample", "Sample"],
-  procedures: ["Sample", "Sample"]
-};
 
 $("#show").click(() => {
   showRecipePopup(sample);
