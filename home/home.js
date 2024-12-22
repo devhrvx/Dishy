@@ -1,15 +1,14 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-import { signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-import { getFirestore, collection, addDoc} from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
-
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDvXage0SbYUMV8RFZzn48ANw4GX_D6Zfo",
   authDomain: "dishy-280a7.firebaseapp.com",
   projectId: "dishy-280a7",
   storageBucket: "dishy-280a7.firebasestorage.app",
-  meId: "1:785622443437:web:acbe9c5813fb60be0c2d24",
+  messagingSenderId: "785622443437",
+  appId: "1:785622443437:web:acbe9c5813fb60be0c2d24",
   measurementId: "G-N3X5D4SQ58"
 };
 
@@ -17,10 +16,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-//userid
 let userId;
 
-var logoutButton = document.querySelector('.logoutButton');
+const logoutButton = document.querySelector('.logoutButton');
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -34,30 +32,30 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-logoutButton.addEventListener('click', () => {
+logoutButton.addEventListener('click', function() {
   signOut(auth)
-    .then(() => {
+    .then(function() {
       console.log("User logged out successfully.");
       window.location.href = "../";
     })
-    .catch((error) => {
+    .catch(function(error) {
       console.error("Error logging out:", error);
     });
 });
 
-$(".item.add").click(function () {
+$(".item.add").click(function() {
   window.location.href = "../add-recipe";
 });
 
-$(".item.book").click(function () {
+$(".item.book").click(function() {
   window.location.href = "../recipe-book";
 });
 
-$(".item.generator").click(function () {
+$(".item.generator").click(function() {
   window.location.href = "../recipe-generator";
 });
 
-$(document).ready(async () => {
+$(document).ready(async function() {
   try {
     const response = await fetch("/api/get-recipe", {
       method: "POST",
@@ -90,13 +88,11 @@ function showRecipePopup(recipe) {
   const $popup = $("#popup");
   $popup.find("#popup-dishName").text(recipe.dishName);
   $popup.find("#popup-flavor").text(recipe.flavor);
-  if (recipe.difficulty == 'hard' ) {
+  if (recipe.difficulty === 'hard') {
     diffEmoji = '👨‍🍳👨‍🍳👨‍🍳';
-  }
-  else if (recipe.difficulty == 'medium'){
+  } else if (recipe.difficulty === 'medium') {
     diffEmoji = '👨‍🍳👨‍🍳';
-  }
-  else {
+  } else {
     diffEmoji = '👨‍🍳';
   }
   $popup.find("#popup-difficulty").text(diffEmoji);
@@ -106,67 +102,61 @@ function showRecipePopup(recipe) {
   $popup.show();
 }
 
+$(".save").click(async function() {
+  const dishName = $("#popup-dishName").text();
+  const flavor = $("#popup-flavor").text();
+  const difficulty = $("#popup-difficulty").text();
+  const ingredients = $("#popup-ingredients li").map(function() {
+    return $(this).text();
+  }).get();
+  const procedures = $("#popup-procedures li").map(function() {
+    return $(this).text();
+  }).get();
 
-$(".save").click(async function () {
-    const dishName = $("#popup-dishName").text();
-    const flavor = $("#popup-flavor").text();
-    const difficulty = $("#popup-difficulty").text();
-    const ingredients = $("#popup-ingredients li").map(function() {
-        return $(this).text();
-    }).get();
-    const procedures = $("#popup-procedures li").map(function() {
-        return $(this).text();
-    }).get();
-
-    if (dishName && flavor && ingredients.length > 0 && procedures.length > 0) {
-        try {
-            await addDoc(collection(db, "recipes"), {
-                userId: userId,
-                dishName: dishName,
-                flavor: flavor,
-                ingredients: ingredients,
-                procedures: procedures,
-                difficulty: difficulty,
-                createdAt: new Date(),
-            });
-            $("#popup").fadeOut();
-            $(".saved").fadeIn();
-        }
-        catch (e) {
-            console.error("Error adding document: ", e);
-            alert("Error saving recipe");
-        }
+  if (dishName && flavor && ingredients.length > 0 && procedures.length > 0) {
+    try {
+      await addDoc(collection(db, "recipes"), {
+        userId: userId,
+        dishName: dishName,
+        flavor: flavor,
+        ingredients: ingredients,
+        procedures: procedures,
+        difficulty: difficulty,
+        createdAt: new Date(),
+      });
+      $("#popup").fadeOut();
+      $(".saved").fadeIn();
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      alert("Error saving recipe");
     }
-    
-    else {
-        alert("An error occurred.");
-    }
+  } else {
+    alert("An error occurred.");
+  }
 });
 
-$("#closePopup").click(() => {
+$("#closePopup").click(function() {
   $(".saved").fadeOut();
 });
 
-$(".close-btn").click(() => {
+$(".close-btn").click(function() {
   $("#popup").hide();
 });
 
-$("#show").click(() => {
+$("#show").click(function() {
   showRecipePopup(sample);
 });
 
 function displayRecipes(recipes) {
   const $recipeGrid = $(".recipe-grid");
-  $recipeGrid.empty(); //clear for the loader
+  $recipeGrid.empty(); // Clear for the loader
 
-  recipes.forEach((recipe) => {
-    if (recipe.difficulty == 'hard' ) {
+  recipes.forEach(function(recipe) {
+    if (recipe.difficulty === 'hard') {
       diffEmoji = '👨‍🍳👨‍🍳👨‍🍳';
-    }
-    else if (recipe.difficulty == 'medium'){
+    } else if (recipe.difficulty === 'medium') {
       diffEmoji = '👨‍🍳👨‍🍳';
-    }
-    else {
+    } else {
       diffEmoji = '👨‍🍳';
     }
     const $recipeItem = $(`
@@ -177,7 +167,7 @@ function displayRecipes(recipes) {
       </div>
     `);
 
-    $recipeItem.click(() => {
+    $recipeItem.click(function() {
       showRecipePopup(recipe);
     });
 

@@ -54,9 +54,11 @@ async function populateRecipes(userId) {
     );
 
     try {
+		//user's data array
         const querySnapshot = await getDocs(q);
         $(".container").empty();
 
+		//loop for each item from user data
         querySnapshot.forEach((doc) => {
             const recipe = doc.data();
             recipe.id = doc.id;
