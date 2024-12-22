@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, query, where, orderBy, } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, query, where, orderBy, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDvXage0SbYUMV8RFZzn48ANw4GX_D6Zfo",
   authDomain: "dishy-280a7.firebaseapp.com",
@@ -45,75 +46,97 @@ logoutButton.addEventListener('click', () => {
 let diffEmoji;
 
 async function populateRecipes(userId) {
-	const recipesRef = collection(db, "recipes");
-	const q = query(
-	  recipesRef,
-	  where("userId", "==", userId),   
-	  orderBy("createdAt", "desc")
-	);
-  
-	try {
-	  const querySnapshot = await getDocs(q);
-	  $(".container").empty();
-  
-	  querySnapshot.forEach((doc) => {
-		const recipe = doc.data();
+    const recipesRef = collection(db, "recipes");
+    const q = query(
+        recipesRef,
+        where("userId", "==", userId),
+        orderBy("createdAt", "desc")
+    );
 
-		if (recipe.difficulty == 'hard' ) {
-			diffEmoji = '👨‍🍳👨‍🍳👨‍🍳';
-		}
-		else if (recipe.difficulty == 'medium'){
-			diffEmoji = '👨‍🍳👨‍🍳';
-		}
-		else {
-			diffEmoji = '👨‍🍳';
-		}
+    try {
+        const querySnapshot = await getDocs(q);
+        $(".container").empty();
 
-		const recipeItemHTML = `
-		  <div class="item" data-recipe='${JSON.stringify(recipe)}' style='display: none;'>
-			<div class="dish-name">${recipe.dishName}</div>
-			<div class="difficulty">Difficulty: ${diffEmoji}</div>
-			<div class="flavor">${recipe.flavor}</div>
-		  </div>`;
+        querySnapshot.forEach((doc) => {
+            const recipe = doc.data();
+            recipe.id = doc.id;
 
-		const $recipeItem = $(recipeItemHTML);
-		$(".container").append($recipeItem);
-		$recipeItem.fadeIn(300);
+            if (recipe.difficulty == 'hard') {
+                diffEmoji = '👨‍🍳👨‍🍳👨‍🍳';
+            } else if (recipe.difficulty == 'medium') {
+                diffEmoji = '👨‍🍳👨‍🍳';
+            } else {
+                diffEmoji = '👨‍🍳';
+            }
 
-	  });
-	}
-	
-	catch (error) {
-	  console.error("Error fetching recipes:", error);
-	}
+            const recipeItemHTML = `
+                <div class="item" data-recipe='${JSON.stringify(recipe)}' style='display: none;'>
+                    <div class="dish-name">${recipe.dishName}</div>
+                    <div class="difficulty">Difficulty: ${diffEmoji}</div>
+                    <div class="flavor">${recipe.flavor}</div>
+                </div>`;
+
+            const $recipeItem = $(recipeItemHTML);
+            $(".container").append($recipeItem);
+            $recipeItem.fadeIn(300);
+        });
+    } catch (error) {
+        console.error("Error fetching recipes:", error);
+    }
 }
 
-
 $(document).on("click", ".item", function() {
-	const recipe = $(this).data("recipe");
-	console.log(recipe);
-	
-	$("#popup-dishName").text(recipe.dishName);
-	$("#popup-flavor").text(recipe.flavor);
-	$("#popup-difficulty").text(diffEmoji);
+    const recipe = $(this).data("recipe");
+    console.log(recipe);
 
-	$("#popup-ingredients").empty();
-		recipe.ingredients.forEach(ingredient => {
-  		const listItem = `<li>${ingredient}</li>`;
-  		$("#popup-ingredients").append(listItem);
-	});
+    $("#popup-dishName").text(recipe.dishName);
+    $("#popup-flavor").text(recipe.flavor);
+    $("#popup-difficulty").text(diffEmoji);
 
-	$("#popup-procedures").empty();
-		recipe.procedures.forEach(procedure => {
-  		const listProcedure = `<li>${procedure}</li>`;
-  		$("#popup-procedures").append(listProcedure);
-	});
-  
-	$("#popup").fadeIn();
+    $("#popup-ingredients").empty();
+    recipe.ingredients.forEach(ingredient => {
+        const listItem = `<li>${ingredient}</li>`;
+        $("#popup-ingredients").append(listItem);
+    });
+
+    $("#popup-procedures").empty();
+    recipe.procedures.forEach(procedure => {
+        const listProcedure = `<li>${procedure}</li>`;
+        $("#popup-procedures").append(listProcedure);
+    });
+
+    $("#popup").fadeIn();
+
+    $(".deleteBtn").data("recipeId", recipe.id);
 });
-  
+
+$(document).on("click", ".deleteBtn", function() {
+    const recipeId = $(this).data("recipeId");
+    const dishName = $("#popup-dishName").text();
+
+    if (confirm(`Are you sure you want to delete ${dishName}?`)) {
+        deleteRecipe(recipeId);
+        $("#popup").fadeOut();
+    }
+});
+
 $(".close-btn").click(function() {
-	$("#popup").fadeOut();
+    $("#popup").fadeOut();
 });
 
-  
+//delete recipe
+async function deleteRecipe(recipeId) {
+    try {
+        const docRef = doc(db, 'recipes', recipeId);
+        await deleteDoc(docRef);
+        console.log(`Deleted ${recipeId} successfully.`);
+        $(".deleted").fadeIn();
+		populateRecipes(userId);
+    } catch (error) {
+        console.log(`Error deleting ${recipeId}`, error);
+    }
+}
+
+$("#closePopup").click(() => {
+    $(".deleted").fadeOut();
+});
