@@ -110,23 +110,7 @@
             font-family: Arial, sans-serif;
         }
     </style>
-    <script>
-        function recaptchaVerified(token) {
-            fetch('/verify-recaptcha', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ token: token })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById("recaptcha-overlay").style.display = "none";
-                } else {
-                    alert("reCAPTCHA verification failed. Please try again.");
-                }
-            });
-        }
-    </script>    
+    <script src="captcha.js"></script>    
 
 <script src="index.js"></script>
 </body>
