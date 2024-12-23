@@ -4,8 +4,6 @@ Dishy! is a clever culinary tool that helps you turn your pantry into a gourmet 
 <br>
 ![Landing page of Dishy!](res/landing.png)
 
-### Demo video:
-[Dishy! Demo video](https://youtube.com/)
 ## Features
 
 - **Find Recipes**: Discover new recipes based on the ingredients you have.
@@ -14,6 +12,9 @@ Dishy! is a clever culinary tool that helps you turn your pantry into a gourmet 
 
 ### Find recipes:<br>
 ![Home page of Dishy!](res/home.png)
+
+### Generate recipes:<br>
+![Generator page of Dishy!](res/demo_generator.png)
 
 ### Add your own recipes:<br>
 ![Add page of Dishy!](res/add.png)
