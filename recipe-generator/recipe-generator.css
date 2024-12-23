@@ -290,7 +290,7 @@ strong {
     justify-items: center;
     align-items: center;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0px 36px;
+    gap: 10px 36px;
     padding-top: 20px;
     box-sizing: border-box;
     border-radius: 8px;

@@ -96,7 +96,14 @@ function showRecipePopup(recipe) {
 $(".save").click(async function() {
   const dishName = $("#popup-dishName").text();
   const flavor = $("#popup-flavor").text();
-  const difficulty = $("#popup-difficulty").text();
+  var difficulty;
+  if ($("#popup-difficulty").text() == '👨‍🍳👨‍🍳👨‍🍳') {
+    difficulty = 'hard';
+  } else if (recipe.difficulty === '👨‍🍳👨‍🍳') {
+    difficulty = 'medium';
+  } else {
+    difficulty = 'easy';
+  }
   const ingredients = $("#popup-ingredients li").map(function() {
     return $(this).text();
   }).get();
