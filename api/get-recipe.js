@@ -9,7 +9,7 @@ const openai = new OpenAI({
 });
 
 app.post("/api/get-recipe", async (request, result) => {
-  const { containsIngredients, flavor, difficulty, count } = request.body;
+  const { containsIngredients, flavor, difficulty, count, suggest } = request.body;
 
   try {
     const prompt = `
@@ -28,10 +28,12 @@ app.post("/api/get-recipe", async (request, result) => {
       All sentences should start with an uppercase letter.
       No need to add numbers to steps in procedures.
       Add accurate quantity/measurements and units for ingredients.
+      The procedures should be properly separated by their actions.
       If the difficulty is not set to "any", all the recipes should follow the given difficulty level.
       All should be grammatically correct.
       The flavor(s) should start with an uppercase letter.
       The flavor(s) should not be cuisines (Asian, Italian, American), it should be like spicy, sweet, and any other flavors, and if the flavor is not "any" you can still mix in new flavors while keeping the original flavor.
+      ${suggest ? "Feel free to suggest additional ingredients that complement the given ingredients." : ""}
     `;
 
     const response = await openai.chat.completions.create({

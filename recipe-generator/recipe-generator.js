@@ -20,16 +20,16 @@ let userId;
 
 const logoutButton = document.querySelector('.logoutButton');
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    console.log("Hello, " + user.displayName);
-    console.log("User ID: " + user.uid);
-    userId = user.uid;
-  } else {
-    console.log("No user is signed in.");
-    window.location.href = "../";
-  }
-});
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     console.log("User, " + user.displayName + " in recipe generator");
+//     console.log("User ID: " + user.uid);
+//     userId = user.uid;
+//   } else {
+//     console.log("No user is signed in.");
+//     window.location.href = "../";
+//   }
+// });
 
 $(document).ready(function () {
   $(".recipe-grid").hide();
@@ -53,6 +53,7 @@ $(".dishy").click(async function() {
   const containsIngredients = $("#containsIngredients").val();
   const flavor = $("#thisFlavor").val();
   const difficulty = $("#difficulty").val();
+  const suggest = $(".welcomeSuggestedIngredients").is(":checked");
 
   console.log(difficulty);
   try {
@@ -65,7 +66,8 @@ $(".dishy").click(async function() {
         containsIngredients: containsIngredients,
         flavor: flavor,
         difficulty: difficulty,
-        count: 6
+        count: 6,
+        suggest: suggest
       })
     });
 

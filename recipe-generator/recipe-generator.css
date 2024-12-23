@@ -296,6 +296,10 @@ strong {
     border-radius: 8px;
 }
 
+input {
+    cursor: pointer;
+}
+
 .loader {
     margin: 5vh auto 5vh auto;
     width: 80px;
