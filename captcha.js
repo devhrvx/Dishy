@@ -1,4 +1,4 @@
-function recaptchaVerified(token) {
+export function recaptchaVerified(token) {
     fetch('/api/verify-recaptcha', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
