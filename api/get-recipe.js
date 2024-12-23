@@ -13,25 +13,25 @@ app.post("/api/get-recipe", async (request, result) => {
 
   try {
     const prompt = `
-      Generate ${count || "3"} recipes that has ${containsIngredients || "any"} ingredients, of ${flavor || "any"} flavor, and ${difficulty || "any (easy, medium, or hard)"} difficulty in strict JSON format:
+      Generate ${count || "3"} recipes that have ${containsIngredients || "any"} ingredients, of ${flavor || "any"} flavor, and strictly ${difficulty || "any"} difficulty in strict JSON format:
       [
         {
           "dishName": "Dish Name",
           "flavor": "Flavor",
-          "difficulty": "Difficulty",
+          "difficulty": "${difficulty || "any"}",
           "ingredients": ["Ingredient1", "Ingredient2"],
           "procedures": ["Step1", "Step2"]
         }
       ]
       Ensure that the response is a valid JSON array and nothing else. Don't include extra text or explanations.
       Only return the JSON array with the recipe data.
-      All sentences should start uppercase letter.
-      No need to add numbers to steps on procedures.
+      All sentences should start with an uppercase letter.
+      No need to add numbers to steps in procedures.
       Add accurate quantity/measurements and units for ingredients.
       If the difficulty is not set to "any", all the recipes should follow the given difficulty level.
       All should be grammatically correct.
-      The flavor(s) should start uppercase.
-      The flavor(s) should not be cuisines (Asian, Italian, American), it should be like spicy, sweet, and any other flavors, and if the flavor is not "any" you can still mix in new flavor while keeping the original flavor.
+      The flavor(s) should start with an uppercase letter.
+      The flavor(s) should not be cuisines (Asian, Italian, American), it should be like spicy, sweet, and any other flavors, and if the flavor is not "any" you can still mix in new flavors while keeping the original flavor.
     `;
 
     const response = await openai.chat.completions.create({

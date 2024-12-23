@@ -291,7 +291,7 @@ strong {
     align-items: center;
     grid-template-columns: repeat(3, 1fr);
     gap: 36px 36px;
-    padding-top: 20px 0px;
+    padding: 20px 10px;
     box-sizing: border-box;
     border-radius: 8px;
 }
