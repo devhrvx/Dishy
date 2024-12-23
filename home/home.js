@@ -63,7 +63,7 @@ $(document).ready(async function() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        dishType: "any",
+        containsIngredients: "any",
         flavor: "any",
         difficulty: "any",
         count: 3

@@ -9,16 +9,16 @@ const openai = new OpenAI({
 });
 
 app.post("/api/get-recipe", async (request, result) => {
-  const { dishType, flavor, difficulty, count } = request.body;
+  const { containsIngredients, flavor, difficulty, count } = request.body;
 
   try {
     const prompt = `
-      Generate ${dishType || "any"} ${count || "3"} recipes in strict JSON format:
+      Generate ${count || "3"} recipes that has ${containsIngredients || "any"} ingredients, of ${flavor || "any"} flavor, and ${difficulty || "easy"} difficulty in strict JSON format:
       [
         {
           "dishName": "Dish Name",
-          "flavor": "${flavor || "any"}",
-          "difficulty": "${difficulty || "easy"}",
+          "flavor": "flavor",
+          "difficulty": "difficulty",
           "ingredients": ["Ingredient1", "Ingredient2"],
           "procedures": ["Step1", "Step2"]
         }
