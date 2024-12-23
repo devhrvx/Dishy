@@ -30,7 +30,7 @@ app.post("/api/get-recipe", async (request, result) => {
       Add accurate quantity/measurements and units for ingredients.
       All should be grammatically correct.
       The flavor(s) should start uppercase.
-      THe flavor(s) should not be cuisines (Asian, Italian, American), it should be like spicy, sweet, and any other flavors.
+      The flavor(s) should not be cuisines (Asian, Italian, American), it should be like spicy, sweet, and any other flavors, and if the flavor is not "any" you can still mix in new flavor while keeping the original flavor.
     `;
 
     const response = await openai.chat.completions.create({

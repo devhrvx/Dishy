@@ -19,6 +19,29 @@
         <div class="logo" onclick="window.location.href = '../home/'"></div>
         <div class="logoutButton">Logout</div>
     </div>
+
+    <div class="field">
+        <h1>Generate Dishy!</h1>
+        <h3>Contains ingredients:</h3>
+        <input type="text" name="ingredients" id="containsIngredients" class="text-input" placeholder="What ingredients do you have?" required>
+        <div class="flavDiff">
+            <div class="cont-flavor">
+                <h3>Flavor:</h3>
+                <input type="text" name="flavor" id="thisFlavor" class="text-input" placeholder="Flavor or taste you want" required>
+            </div>
+
+            <div class="cont-diff">
+                <h3>Difficulty:</h3>
+                <select id="difficulty" name="difficulty" required>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="dishy">Dishy!</button>
+    </div>
     
     <script src="../recipe-generator/recipe-generator.js" type="module"></script>
 </body>
