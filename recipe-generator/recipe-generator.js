@@ -22,7 +22,6 @@ const logoutButton = document.querySelector('.logoutButton');
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    document.querySelector('h1').innerHTML = "Hello, " + user.displayName;
     console.log("Hello, " + user.displayName);
     console.log("User ID: " + user.uid);
     userId = user.uid;
@@ -42,3 +41,127 @@ logoutButton.addEventListener('click', function() {
       console.error("Error logging out:", error);
     });
 });
+
+$(".dishy").click(async function() {
+  const containsIngredients = $("#containsIngredients").val();
+  const flavor = $("#thisFlavor").val();
+  const difficulty = $("#difficulty").val();
+
+  try {
+    const response = await fetch("/api/get-recipe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        containsIngredients: containsIngredients,
+        flavor: flavor,
+        difficulty: difficulty,
+        count: 6
+      })
+    });
+
+    const data = await response.json();
+    if (data.success) {
+      displayRecipes(data.recipes);
+      $(".recipe-grid").css("display", "grid");
+    } else {
+      console.error("Failed to fetch recipes");
+    }
+  } catch (error) {
+    console.error("Error fetching recipes:", error);
+  }
+});
+
+let diffEmoji;
+
+function showRecipePopup(recipe) {
+  const $popup = $("#popup");
+  $popup.find("#popup-dishName").text(recipe.dishName);
+  $popup.find("#popup-flavor").text(recipe.flavor);
+  if (recipe.difficulty === 'hard') {
+    diffEmoji = '👨‍🍳👨‍🍳👨‍🍳';
+  } else if (recipe.difficulty === 'medium') {
+    diffEmoji = '👨‍🍳👨‍🍳';
+  } else {
+    diffEmoji = '👨‍🍳';
+  }
+  $popup.find("#popup-difficulty").text(diffEmoji);
+  $popup.find("#popup-ingredients").html(recipe.ingredients.map(ingredient => `<li>${ingredient}</li>`).join(""));
+  $popup.find("#popup-procedures").html(recipe.procedures.map(procedure => `<li>${procedure}</li>`).join(""));
+
+  $popup.show();
+}
+
+$(".save").click(async function() {
+  const dishName = $("#popup-dishName").text();
+  const flavor = $("#popup-flavor").text();
+  const difficulty = $("#popup-difficulty").text();
+  const ingredients = $("#popup-ingredients li").map(function() {
+    return $(this).text();
+  }).get();
+  const procedures = $("#popup-procedures li").map(function() {
+    return $(this).text();
+  }).get();
+
+  if (dishName && flavor && ingredients.length > 0 && procedures.length > 0) {
+    try {
+      await addDoc(collection(db, "recipes"), {
+        userId: userId,
+        dishName: dishName,
+        flavor: flavor,
+        ingredients: ingredients,
+        procedures: procedures,
+        difficulty: difficulty,
+        createdAt: new Date(),
+      });
+      $("#popup").fadeOut();
+      $(".saved").fadeIn();
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      alert("Error saving recipe");
+    }
+  } else {
+    alert("An error occurred.");
+  }
+});
+
+$("#closePopup").click(function() {
+  $(".saved").fadeOut();
+});
+
+$(".close-btn").click(function() {
+  $("#popup").hide();
+});
+
+$("#show").click(function() {
+  showRecipePopup(sample);
+});
+
+function displayRecipes(recipes) {
+  const $recipeGrid = $(".recipe-grid");
+  $recipeGrid.empty();
+
+  recipes.forEach(function(recipe) {
+    if (recipe.difficulty === 'hard') {
+      diffEmoji = '👨‍🍳👨‍🍳👨‍🍳';
+    } else if (recipe.difficulty === 'medium') {
+      diffEmoji = '👨‍🍳👨‍🍳';
+    } else {
+      diffEmoji = '👨‍🍳';
+    }
+    const $recipeItem = $(`
+      <div class="recipe-item" data-recipe='${JSON.stringify(recipe)}'>
+        <div class="dish-name">${recipe.dishName}</div>
+        <div class="difficulty">Difficulty: ${diffEmoji}</div>
+        <div class="flavor">${recipe.flavor}</div>
+      </div>
+    `);
+
+    $recipeItem.click(function() {
+      showRecipePopup(recipe);
+    });
+
+    $recipeGrid.append($recipeItem);
+  });
+}
