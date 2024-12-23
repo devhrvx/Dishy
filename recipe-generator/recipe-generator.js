@@ -97,9 +97,9 @@ $(".save").click(async function() {
   const dishName = $("#popup-dishName").text();
   const flavor = $("#popup-flavor").text();
   var difficulty;
-  if ($("#popup-difficulty").text() == '👨‍🍳👨‍🍳👨‍🍳') {
+  if ($("#popup-difficulty").text() === '👨‍🍳👨‍🍳👨‍🍳') {
     difficulty = 'hard';
-  } else if (recipe.difficulty === '👨‍🍳👨‍🍳') {
+  } else if ($("#popup-difficulty") === '👨‍🍳👨‍🍳') {
     difficulty = 'medium';
   } else {
     difficulty = 'easy';
