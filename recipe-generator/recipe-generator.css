@@ -367,12 +367,16 @@ input {
     }
 
     .field {
-        padding: 20px;
-        width: 100%;
+        margin-top: 1vh;
+        padding: 0;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
     }
 
     .field h1 {
-        font-size: 24px;
+        font-size: 34px;
         text-align: center;
     }
 
@@ -381,7 +385,7 @@ input {
     }
 
     .text-input {
-        width: 100%;
+        width: 90%;
         padding: 10px;
         margin-bottom: 10px;
         height: 20px;
@@ -390,10 +394,17 @@ input {
     .flavDiff {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        margin-top: 10px;
     }
 
-    .cont-flavor h3, .cont-diff h3 {
-        font-size: 18px;
+    .cont-diff, .cont-flavor {
+        width: 100%;
+    }
+    
+    select {
+        width: 100%;
     }
 
     .recipe-grid {
@@ -422,5 +433,13 @@ input {
 
     .loader {
         margin: 20px auto;
+    }
+
+    .welcomeSuggestedIngredients {
+        font-size: 13px;
+    }
+
+    .dishy {
+        margin-top: 5vh;
     }
 }

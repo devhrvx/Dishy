@@ -27,8 +27,7 @@ app.post("/api/get-recipe", async (request, result) => {
       Only return the JSON array with the recipe data.
       All sentences should start with an uppercase letter.
       The dish name must accurately represent the main ingredients listed and the overall essence of the recipe. Verify that any key ingredient mentioned in the name is included in both the ingredients list and the procedures.      No need to add numbers to steps in procedures.
-      Add accurate quantity/measurements and units for ingredients use metric measurements for weight.
-      The procedures should be properly separated by their actions.
+      Ensure all ingredients include accurate quantities and units (e.g., grams, ml, or pieces) based on metric measurements. Avoid generic terms like 'some' or 'a little.      The procedures should be properly separated by their actions.
       If the difficulty is not set to "any", all the recipes should follow the given difficulty level.
       All should be grammatically correct.
       The flavor(s) should start with an uppercase letter.
