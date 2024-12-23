@@ -48,6 +48,7 @@ logoutButton.addEventListener('click', function() {
 });
 
 $(".dishy").click(async function() {
+  $(".recipe-grid").hide();
   $(".loader").show();
   const containsIngredients = $("#containsIngredients").val();
   const flavor = $("#thisFlavor").val();
