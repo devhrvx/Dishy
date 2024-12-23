@@ -33,7 +33,7 @@ app.post("/api/get-recipe", async (request, result) => {
       All should be grammatically correct.
       The flavor(s) should start with an uppercase letter.
       The flavor(s) should not be cuisines (Asian, Italian, American), it should be like spicy, sweet, and any other flavors, and if the flavor is not "any" you can still mix in new flavors while keeping the original flavor.
-      ${suggest ? "Feel free to suggest additional ingredients that complement the given ingredients." : ""}
+      ${suggest ? "Feel free to add additional ingredients that complement the given ingredients." : ""}
     `;
 
     const response = await openai.chat.completions.create({
