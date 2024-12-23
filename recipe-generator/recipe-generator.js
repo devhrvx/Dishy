@@ -20,15 +20,20 @@ let userId;
 
 const logoutButton = document.querySelector('.logoutButton');
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    console.log("Hello, " + user.displayName);
-    console.log("User ID: " + user.uid);
-    userId = user.uid;
-  } else {
-    console.log("No user is signed in.");
-    window.location.href = "../";
-  }
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     console.log("Hello, " + user.displayName);
+//     console.log("User ID: " + user.uid);
+//     userId = user.uid;
+//   } else {
+//     console.log("No user is signed in.");
+//     window.location.href = "../";
+//   }
+// });
+
+$(document).ready(function () {
+  $(".recipe-grid").hide();
+  $(".loader").hide();
 });
 
 logoutButton.addEventListener('click', function() {
@@ -43,10 +48,12 @@ logoutButton.addEventListener('click', function() {
 });
 
 $(".dishy").click(async function() {
+  $(".loader").show();
   const containsIngredients = $("#containsIngredients").val();
   const flavor = $("#thisFlavor").val();
   const difficulty = $("#difficulty").val();
 
+  console.log(difficulty);
   try {
     const response = await fetch("/api/get-recipe", {
       method: "POST",
@@ -64,6 +71,8 @@ $(".dishy").click(async function() {
     const data = await response.json();
     if (data.success) {
       displayRecipes(data.recipes);
+      $(".loader").hide();
+      $(".recipe-grid").show();
       $(".recipe-grid").css("display", "grid");
     } else {
       console.error("Failed to fetch recipes");

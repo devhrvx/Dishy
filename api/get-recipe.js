@@ -13,12 +13,12 @@ app.post("/api/get-recipe", async (request, result) => {
 
   try {
     const prompt = `
-      Generate ${count || "3"} recipes that has ${containsIngredients || "any"} ingredients, of ${flavor || "any"} flavor, and ${difficulty || "easy"} difficulty in strict JSON format:
+      Generate ${count || "3"} recipes that has ${containsIngredients || "any"} ingredients, of ${flavor || "any"} flavor, and ${difficulty || "any (easy, medium, or hard)"} difficulty in strict JSON format:
       [
         {
           "dishName": "Dish Name",
-          "flavor": "flavor",
-          "difficulty": "difficulty",
+          "flavor": "Flavor",
+          "difficulty": "Difficulty",
           "ingredients": ["Ingredient1", "Ingredient2"],
           "procedures": ["Step1", "Step2"]
         }
@@ -28,6 +28,7 @@ app.post("/api/get-recipe", async (request, result) => {
       All sentences should start uppercase letter.
       No need to add numbers to steps on procedures.
       Add accurate quantity/measurements and units for ingredients.
+      If the difficulty is not set to "any", all the recipes should follow the given difficulty level.
       All should be grammatically correct.
       The flavor(s) should start uppercase.
       The flavor(s) should not be cuisines (Asian, Italian, American), it should be like spicy, sweet, and any other flavors, and if the flavor is not "any" you can still mix in new flavor while keeping the original flavor.

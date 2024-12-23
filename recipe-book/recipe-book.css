@@ -232,7 +232,7 @@ strong {
     mask-composite:exclude,add,add,add,add,add,add;
     -webkit-mask-repeat: no-repeat;
     animation: l8 3s infinite;
-  }
+}
   @keyframes l8 {
    0%   {-webkit-mask-size: auto,0 0,0 0,0 0,0 0,0 0,0 0}
    15%  {-webkit-mask-size: auto,20px 20px,0 0,0 0,0 0,0 0,0 0}
