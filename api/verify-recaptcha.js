@@ -1,15 +1,14 @@
-// Use `import` syntax instead of `require`
-import fetch from 'node-fetch'; // Import fetch from node-fetch
+import fetch from 'node-fetch';
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-        const { token } = req.body; // Get the token from the request body
+        const { token } = req.body;
 
         if (!token) {
             return res.status(400).json({ success: false, error: 'No token provided' });
         }
 
-        const SECRET_KEY = process.env.RECAPTCHA_SK; // Use environment variable
+        const SECRET_KEY = process.env.RECAPTCHA_SK;
 
         if (!SECRET_KEY) {
             return res.status(500).json({ success: false, error: 'Missing secret key' });
