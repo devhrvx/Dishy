@@ -23,7 +23,7 @@ let userId = null;
 onAuthStateChanged(auth, (user) => {
 	if (user) {
 		userId = user.uid;
-		console.log("User in add-recipe: " + user.displayName);
+		console.log("User " + user.displayName + " in add-recipe.");
 		console.log("User ID: " + userId);
 	} else {
 		console.log("No user is signed in.");

@@ -23,7 +23,7 @@ let userId = null;
 onAuthStateChanged(auth, (user) => {
 	if (user) {
 		userId = user.uid;
-		console.log("User in recipe-book: " + user.displayName);
+		console.log("User " + user.displayName + " in recipe-book.");
 		console.log("User ID: " + userId);
 		populateRecipes(userId);
 	} else {
