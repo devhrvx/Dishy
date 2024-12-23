@@ -55,6 +55,10 @@ $(".dishy").click(async function() {
   const difficulty = $("#difficulty").val();
   const suggest = $(".welcomeSuggestedIngredients").is(":checked");
 
+  if(suggest) {
+    containsIngredients += " and any other ingredients.";
+  }
+
   console.log(difficulty);
   try {
     const response = await fetch("/api/get-recipe", {
@@ -67,7 +71,6 @@ $(".dishy").click(async function() {
         flavor: flavor,
         difficulty: difficulty,
         count: 6,
-        suggest: suggest
       })
     });
 
