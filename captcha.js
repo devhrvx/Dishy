@@ -1,3 +1,4 @@
+console.log("recaptchaVerified function loaded: ", typeof recaptchaVerified);
 function recaptchaVerified(token) {
     fetch('/api/verify-recaptcha', {
         method: 'POST',
