@@ -20,16 +20,16 @@ let userId;
 
 const logoutButton = document.querySelector('.logoutButton');
 
-// onAuthStateChanged(auth, (user) => {
-//   if (user) {
-//     console.log("User, " + user.displayName + " in recipe generator.");
-//     console.log("User ID: " + user.uid);
-//     userId = user.uid;
-//   } else {
-//     console.log("No user is signed in.");
-//     window.location.href = "../";
-//   }
-// });
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("User, " + user.displayName + " in recipe generator.");
+    console.log("User ID: " + user.uid);
+    userId = user.uid;
+  } else {
+    console.log("No user is signed in.");
+    window.location.href = "../";
+  }
+});
 
 $(document).ready(function () {
   $(".recipe-grid").hide();
