@@ -34,7 +34,7 @@ app.post("/api/get-recipe", async (request, result) => {
       The flavor(s) should not be cuisines (Asian, Italian, American), it should be like spicy, sweet, and any other flavors, and if the flavor is not "any" you can still mix in new flavors while keeping the original flavor.
     `;
 
-    const response = await openai.chat.completions.create({
+    const openAiCall = openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         { role: "system", content: "You are a helpful recipe generator." },
@@ -43,12 +43,22 @@ app.post("/api/get-recipe", async (request, result) => {
       temperature: 0.7,
     });
 
+    const timeout = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("Request timed out")), 30000)
+    );
+
+    const response = await Promise.race([openAiCall, timeout]);
+
     const recipes = JSON.parse(response.choices[0].message.content.trim());
 
     result.status(200).json({ success: true, recipes });
   } catch (error) {
     console.error("Error generating recipe:", error);
-    result.status(500).json({ success: false, message: "Failed to generate recipe" });
+    if (error.message === "Request timed out") {
+      result.status(504).json({ success: false, message: "Request timed out" });
+    } else {
+      result.status(500).json({ success: false, message: "Failed to generate recipe" });
+    }
   }
 });
 

@@ -85,6 +85,9 @@ $(".dishy").click(async function() {
     }
   } catch (error) {
     console.error("Error fetching recipes:", error);
+    if (error.message === "Request timed out") {
+      alert("Request timed out. Please reload or try again.");
+    }
   }
 });
 
